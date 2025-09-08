@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project: ChipOS
 
-ChipOS is a fork of Archon, customized with modern tech-focused UI and branding. It serves as a command center for AI coding assistants with knowledge management and task tracking capabilities.
+ChipOS is a fork of Archon, customized with modern tech-focused UI and branding. It serves as a command center for AI coding assistants with knowledge management and task tracking capabilities connected via Model Context Protocol (MCP).
 
 ## Beta Development Guidelines
 
@@ -18,47 +18,36 @@ ChipOS is a fork of Archon, customized with modern tech-focused UI and branding.
 
 ### Error Handling
 
-**Core Principle**: In beta, we need to intelligently decide when to fail hard and fast to quickly address issues, and when to allow processes to complete in critical services despite failures. Read below carefully and make intelligent decisions on a case-by-case basis.
+**Core Principle**: In beta, we need to intelligently decide when to fail fast to quickly address issues, and when to allow processes to complete in critical services despite failures.
 
-#### When to Fail Fast and Loud (Let it Crash!)
+#### When to Fail Fast (Let it Crash!)
 
-These errors should stop execution and bubble up immediately: (except for crawling flows)
+These errors should stop execution and bubble up immediately (except for crawling flows):
 
-- **Service startup failures** - If credentials, database, or any service can't initialize, the system should crash with a clear error
-- **Missing configuration** - Missing environment variables or invalid settings should stop the system
-- **Database connection failures** - Don't hide connection issues, expose them
-- **Authentication/authorization failures** - Security errors must be visible and halt the operation
-- **Data corruption or validation errors** - Never silently accept bad data, Pydantic should raise
-- **Critical dependencies unavailable** - If a required service is down, fail immediately
-- **Invalid data that would corrupt state** - Never store zero embeddings, null foreign keys, or malformed JSON
+- **Service startup failures** - If credentials, database, or any service can't initialize
+- **Missing configuration** - Missing environment variables or invalid settings
+- **Database connection failures** - Don't hide connection issues
+- **Authentication/authorization failures** - Security errors must be visible
+- **Data corruption or validation errors** - Never silently accept bad data
+- **Critical dependencies unavailable** - If a required service is down
+- **Invalid data that would corrupt state** - Never store zero embeddings or malformed JSON
 
 #### When to Complete but Log Detailed Errors
 
 These operations should continue but track and report failures clearly:
 
-- **Batch processing** - When crawling websites or processing documents, complete what you can and report detailed failures for each item
-- **Background tasks** - Embedding generation, async jobs should finish the queue but log failures
-- **WebSocket events** - Don't crash on a single event failure, log it and continue serving other clients
-- **Optional features** - If projects/tasks are disabled, log and skip rather than crash
-- **External API calls** - Retry with exponential backoff, then fail with a clear message about what service failed and why
+- **Batch processing** - When crawling websites or processing documents
+- **Background tasks** - Embedding generation, async jobs should finish the queue
+- **WebSocket events** - Don't crash on a single event failure
+- **Optional features** - If projects/tasks are disabled, log and skip
+- **External API calls** - Retry with exponential backoff, then fail with clear message
 
-#### Critical Nuance: Never Accept Corrupted Data
+#### Critical: Never Accept Corrupted Data
 
 When a process should continue despite failures, it must **skip the failed item entirely** rather than storing corrupted data:
 
-**❌ WRONG - Silent Corruption:**
-
 ```python
-try:
-    embedding = create_embedding(text)
-except Exception as e:
-    embedding = [0.0] * 1536  # NEVER DO THIS - corrupts database
-    store_document(doc, embedding)
-```
-
-**✅ CORRECT - Skip Failed Items:**
-
-```python
+# CORRECT - Skip Failed Items:
 try:
     embedding = create_embedding(text)
     store_document(doc, embedding)  # Only store on success
@@ -68,44 +57,13 @@ except Exception as e:
     # Continue with next document, don't store anything
 ```
 
-**✅ CORRECT - Batch Processing with Failure Tracking:**
-
-```python
-def process_batch(items):
-    results = {'succeeded': [], 'failed': []}
-
-    for item in items:
-        try:
-            result = process_item(item)
-            results['succeeded'].append(result)
-        except Exception as e:
-            results['failed'].append({
-                'item': item,
-                'error': str(e),
-                'traceback': traceback.format_exc()
-            })
-            logger.error(f"Failed to process {item.id}: {e}")
-
-    # Always return both successes and failures
-    return results
-```
-
-#### Error Message Guidelines
-
-- Include context about what was being attempted when the error occurred
-- Preserve full stack traces with `exc_info=True` in Python logging
-- Use specific exception types, not generic Exception catching
-- Include relevant IDs, URLs, or data that helps debug the issue
-- Never return None/null to indicate failure - raise an exception with details
-- For batch operations, always report both success count and detailed failure list
-
 ### Code Quality
 
-- Remove dead code immediately rather than maintaining it - no backward compatibility or legacy functions
+- Remove dead code immediately rather than maintaining it
 - Prioritize functionality over production-ready patterns
 - Focus on user experience and feature completeness
-- When updating code, don't reference what is changing (avoid keywords like LEGACY, CHANGED, REMOVED), instead focus on comments that document just the functionality of the code
-- When commenting on code in the codebase, only comment on the functionality and reasoning behind the code. Refrain from speaking to ChipOS being in "beta" or referencing anything else that comes from these global rules.
+- When updating code, focus on comments that document just the functionality
+- When commenting, only comment on functionality and reasoning
 
 ## Development Commands
 
@@ -179,7 +137,7 @@ make test-be             # Backend tests only
 
 ## Architecture Overview
 
-ChipOS Beta is a microservices-based knowledge management system with MCP (Model Context Protocol) integration:
+ChipOS is a microservices-based knowledge management system with MCP (Model Context Protocol) integration:
 
 ### Service Architecture
 
@@ -191,9 +149,9 @@ ChipOS Beta is a microservices-based knowledge management system with MCP (Model
   - **Styling**: Tron-inspired glassmorphism with Tailwind CSS
   - **Linting**: Biome for `/features`, ESLint for legacy code
 
-- **Main Server (port 8181)**: FastAPI with HTTP polling for updates
+- **Main Server (port 8181)**: FastAPI with Socket.IO support
   - Handles all business logic, database operations, and external API calls
-  - WebSocket support removed in favor of HTTP polling with ETag caching
+  - WebSocket support for real-time updates
 
 - **MCP Server (port 8051)**: Lightweight HTTP-based MCP protocol server
   - Provides tools for AI assistants (Claude, Cursor, Windsurf)
@@ -298,21 +256,6 @@ async def handle_not_found(request, exc):
     )
 ```
 
-## Polling Architecture
-
-### HTTP Polling (replaced Socket.IO)
-
-- **Polling intervals**: 1-2s for active operations, 5-10s for background data
-- **ETag caching**: Reduces bandwidth by ~70% via 304 Not Modified responses
-- **Smart pausing**: Stops polling when browser tab is inactive
-- **Progress endpoints**: `/api/progress/{id}` for operation tracking
-
-### Key Polling Hooks
-
-- `useSmartPolling` - Adjusts interval based on page visibility/focus
-- `useCrawlProgressPolling` - Specialized for crawl progress with auto-cleanup
-- `useProjectTasks` - Smart polling for task lists
-
 ## Database Schema
 
 Key tables in Supabase:
@@ -357,7 +300,7 @@ Required in `.env`:
 
 ```bash
 SUPABASE_URL=https://your-project.supabase.co  # Or http://host.docker.internal:8000 for local
-SUPABASE_SERVICE_KEY=your-service-key-here      # Use legacy key format for cloud Supabase
+SUPABASE_SERVICE_KEY=your-service-key-here      # Use service role key for full access
 ```
 
 Optional:
@@ -425,7 +368,7 @@ npm run lint:files src/components/SomeComponent.tsx
 
 ## MCP Tools Available
 
-When connected to Client/Cursor/Windsurf:
+When connected to Claude/Cursor/Windsurf:
 
 - `chipos:perform_rag_query` - Search knowledge base
 - `chipos:search_code_examples` - Find code snippets
@@ -440,7 +383,7 @@ When connected to Client/Cursor/Windsurf:
 
 - Projects feature is optional - toggle in Settings UI
 - All services communicate via HTTP, not gRPC
-- HTTP polling handles all updates
+- Socket.IO handles real-time updates
 - Frontend uses Vite proxy for API calls in development
 - Python backend uses `uv` for dependency management
 - Docker Compose handles service orchestration
