@@ -2,9 +2,9 @@ name: Continuous Integration
 
 on:
   push:
-    branches: [ main, unit-testing-ci ]
+    branches: [main, unit-testing-ci]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch: # Allow manual triggering
 
 env:
@@ -12,8 +12,8 @@ env:
   # These are fake but properly formatted values that will pass validation
   SUPABASE_URL: ${{ secrets.SUPABASE_URL || 'https://xyzcompanytest.supabase.co' }}
   SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU' }}
-  NODE_VERSION: '18'
-  PYTHON_VERSION: '3.12'
+  NODE_VERSION: "18"
+  PYTHON_VERSION: "3.12"
 
 jobs:
   # Job 1: Frontend Testing (React/TypeScript/Vitest)
@@ -33,7 +33,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
           cache-dependency-path: archon-ui-main/package-lock.json
 
       - name: Install dependencies
@@ -41,35 +41,35 @@ jobs:
 
       # - name: Run ESLint
       #   run: npm run lint
-# 
-      # - name: Run TypeScript type check
-      #   run: npx tsc --noEmit
-# 
-      # - name: Run Vitest tests with coverage
-      #   run: npm run test:coverage:run
-# 
-      # - name: Generate test summary
-      #   if: always()
-      #   run: npm run test:coverage:summary
-# 
-      # - name: Upload frontend test results
-      #   if: always()
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: frontend-test-results
-      #     path: |
-      #       archon-ui-main/coverage/test-results.json
-      #       archon-ui-main/public/test-results/
-      #     retention-days: 30
-# 
-      # - name: Upload frontend coverage to Codecov
-      #   if: always()
-      #   uses: codecov/codecov-action@v4
-      #   with:
-      #     files: ./archon-ui-main/public/test-results/coverage/lcov.info
-      #     flags: frontend
-      #     name: frontend-coverage
-      #     token: ${{ secrets.CODECOV_TOKEN }}
+  #
+  # - name: Run TypeScript type check
+  #   run: npx tsc --noEmit
+  #
+  # - name: Run Vitest tests with coverage
+  #   run: npm run test:coverage:run
+  #
+  # - name: Generate test summary
+  #   if: always()
+  #   run: npm run test:coverage:summary
+  #
+  # - name: Upload frontend test results
+  #   if: always()
+  #   uses: actions/upload-artifact@v4
+  #   with:
+  #     name: frontend-test-results
+  #     path: |
+  #       archon-ui-main/coverage/test-results.json
+  #       archon-ui-main/public/test-results/
+  #     retention-days: 30
+  #
+  # - name: Upload frontend coverage to Codecov
+  #   if: always()
+  #   uses: codecov/codecov-action@v4
+  #   with:
+  #     files: ./archon-ui-main/public/test-results/coverage/lcov.info
+  #     flags: frontend
+  #     name: frontend-coverage
+  #     token: ${{ secrets.CODECOV_TOKEN }}
 
   # Job 2: Backend Testing (Python/pytest)
   backend-tests:
@@ -148,11 +148,11 @@ jobs:
   docker-build-test:
     name: Docker Build Tests
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         service: [server, mcp, agents, frontend]
-        
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -222,10 +222,10 @@ jobs:
                 archon-${{ matrix.service }}:test
               ;;
           esac
-          
+
           # Wait for container to start
           sleep 30
-          
+
           # Check if container is still running
           if docker ps | grep -q test-${{ matrix.service }}; then
             echo "✅ Container test-${{ matrix.service }} is running"
@@ -251,12 +251,12 @@ jobs:
     steps:
       - name: Download all artifacts
         uses: actions/download-artifact@v4
-        
+
       - name: Create test summary
         run: |
-          echo "# 🧪 Archon V2 Beta - CI Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "# 🧪 ChipOS V2 Beta - CI Test Results" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           # Frontend Results
           echo "## 🎨 Frontend Tests (React + Vitest)" >> $GITHUB_STEP_SUMMARY
           if [ -f "frontend-test-results/coverage/test-results.json" ]; then
@@ -265,7 +265,7 @@ jobs:
             echo "❌ Frontend tests failed or incomplete" >> $GITHUB_STEP_SUMMARY
           fi
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           # Backend Results
           echo "## 🐍 Backend Tests (Python + pytest)" >> $GITHUB_STEP_SUMMARY
           if [ -d "backend-test-results-unit" ]; then
@@ -273,24 +273,24 @@ jobs:
           else
             echo "❌ Unit tests failed or incomplete" >> $GITHUB_STEP_SUMMARY
           fi
-          
+
           if [ -d "backend-test-results-integration" ]; then
             echo "✅ Integration tests completed" >> $GITHUB_STEP_SUMMARY
           else
             echo "❌ Integration tests failed or incomplete" >> $GITHUB_STEP_SUMMARY
           fi
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           # Docker Build Results
           echo "## 🐳 Docker Build Tests" >> $GITHUB_STEP_SUMMARY
           echo "Docker build tests completed - check individual job results" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           # Coverage Information
           echo "## 📊 Coverage Reports" >> $GITHUB_STEP_SUMMARY
           echo "Coverage reports have been uploaded to Codecov and are available as artifacts." >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           # Architecture Context
           echo "## 🏗️ Architecture Tested" >> $GITHUB_STEP_SUMMARY
           echo "- **Frontend**: React + TypeScript + Vite (Port 3737)" >> $GITHUB_STEP_SUMMARY

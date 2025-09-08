@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Project: ChipOS
+
+ChipOS is a fork of Archon, customized with modern tech-focused UI and branding. It serves as a command center for AI coding assistants with knowledge management and task tracking capabilities.
+
 ## Beta Development Guidelines
 
 **Local-only deployment** - each user runs their own instance.
@@ -101,11 +105,11 @@ def process_batch(items):
 - Prioritize functionality over production-ready patterns
 - Focus on user experience and feature completeness
 - When updating code, don't reference what is changing (avoid keywords like LEGACY, CHANGED, REMOVED), instead focus on comments that document just the functionality of the code
-- When commenting on code in the codebase, only comment on the functionality and reasoning behind the code. Refrain from speaking to Archon being in "beta" or referencing anything else that comes from these global rules.
+- When commenting on code in the codebase, only comment on the functionality and reasoning behind the code. Refrain from speaking to ChipOS being in "beta" or referencing anything else that comes from these global rules.
 
 ## Development Commands
 
-### Frontend (archon-ui-main/)
+### Frontend (chipos-ui-main/)
 
 ```bash
 npm run dev              # Start development server on port 3737
@@ -146,9 +150,9 @@ uv run mypy src/         # Type check
 # Docker operations
 docker compose up --build -d       # Start all services
 docker compose --profile backend up -d  # Backend only (for hybrid dev)
-docker compose logs -f archon-server   # View server logs
-docker compose logs -f archon-mcp      # View MCP server logs
-docker compose restart archon-server   # Restart after code changes
+docker compose logs -f chipos-server   # View server logs
+docker compose logs -f chipos-mcp      # View MCP server logs
+docker compose restart chipos-server   # Restart after code changes
 docker compose down      # Stop all services
 docker compose down -v   # Stop and remove volumes
 ```
@@ -157,7 +161,7 @@ docker compose down -v   # Stop and remove volumes
 
 ```bash
 # Hybrid development (recommended) - backend in Docker, frontend local
-make dev                 # Or manually: docker compose --profile backend up -d && cd archon-ui-main && npm run dev
+make dev                 # Or manually: docker compose --profile backend up -d && cd chipos-ui-main && npm run dev
 
 # Full Docker mode
 make dev-docker          # Or: docker compose up --build -d
@@ -175,7 +179,7 @@ make test-be             # Backend tests only
 
 ## Architecture Overview
 
-Archon Beta is a microservices-based knowledge management system with MCP (Model Context Protocol) integration:
+ChipOS Beta is a microservices-based knowledge management system with MCP (Model Context Protocol) integration:
 
 ### Service Architecture
 
@@ -321,7 +325,7 @@ Key tables in Supabase:
   - Contains features array, documents, and metadata
 - `tasks` - Task tracking linked to projects
   - Status: todo, doing, review, done
-  - Assignee: User, Archon, AI IDE Agent
+  - Assignee: User, ChipOS, AI IDE Agent
 - `code_examples` - Extracted code snippets
   - Language, summary, and relevance metadata
 
@@ -373,7 +377,7 @@ ARCHON_UI_PORT=3737                  # Frontend port
 1. Create route handler in `python/src/server/api_routes/`
 2. Add service logic in `python/src/server/services/`
 3. Include router in `python/src/server/main.py`
-4. Update frontend service in `archon-ui-main/src/features/[feature]/services/`
+4. Update frontend service in `chipos-ui-main/src/features/[feature]/services/`
 
 ### Add a new UI component in features directory
 
@@ -386,7 +390,7 @@ ARCHON_UI_PORT=3737                  # Frontend port
 ### Debug MCP connection issues
 
 1. Check MCP health: `curl http://localhost:8051/health`
-2. View MCP logs: `docker compose logs archon-mcp`
+2. View MCP logs: `docker compose logs chipos-mcp`
 3. Test tool execution via UI MCP page
 4. Verify Supabase connection and credentials
 
@@ -423,14 +427,14 @@ npm run lint:files src/components/SomeComponent.tsx
 
 When connected to Client/Cursor/Windsurf:
 
-- `archon:perform_rag_query` - Search knowledge base
-- `archon:search_code_examples` - Find code snippets
-- `archon:create_project` - Create new project
-- `archon:list_projects` - List all projects
-- `archon:create_task` - Create task in project
-- `archon:list_tasks` - List and filter tasks
-- `archon:update_task` - Update task status/details
-- `archon:get_available_sources` - List knowledge sources
+- `chipos:perform_rag_query` - Search knowledge base
+- `chipos:search_code_examples` - Find code snippets
+- `chipos:create_project` - Create new project
+- `chipos:list_projects` - List all projects
+- `chipos:create_task` - Create task in project
+- `chipos:list_tasks` - List and filter tasks
+- `chipos:update_task` - Update task status/details
+- `chipos:get_available_sources` - List knowledge sources
 
 ## Important Notes
 

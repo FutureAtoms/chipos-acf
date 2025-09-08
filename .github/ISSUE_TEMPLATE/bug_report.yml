@@ -1,5 +1,5 @@
 name: 🐛 Bug Report
-description: Report a bug to help us improve Archon Beta
+description: Report a bug to help us improve ChipOS Beta
 title: "🐛 [Bug]: "
 labels: ["bug", "needs-triage"]
 assignees: []
@@ -8,15 +8,15 @@ body:
   - type: markdown
     attributes:
       value: |
-        # 🐛 Bug Report for Archon Beta
-        
-        Thank you for taking the time to report a bug! This helps us improve Archon for everyone.
+        # 🐛 Bug Report for ChipOS Beta
+
+        Thank you for taking the time to report a bug! This helps us improve ChipOS for everyone.
 
   - type: input
     id: archon-version
     attributes:
-      label: Archon Version
-      description: What version of Archon are you running?
+      label: ChipOS Version
+      description: What version of ChipOS are you running?
       placeholder: "v0.1.0 or check package.json"
     validations:
       required: true
@@ -28,7 +28,7 @@ body:
       description: How severe is this bug?
       options:
         - "🟢 Low - Minor inconvenience"
-        - "🟡 Medium - Affects functionality" 
+        - "🟡 Medium - Affects functionality"
         - "🟠 High - Blocks important features"
         - "🔴 Critical - App unusable"
     validations:
@@ -90,11 +90,11 @@ body:
     id: component
     attributes:
       label: Affected Component
-      description: Which part of Archon is affected?
+      description: Which part of ChipOS is affected?
       options:
         - "🔍 Knowledge Base / RAG"
         - "🔗 MCP Integration"
-        - "📋 Projects & Tasks (if enabled)" 
+        - "📋 Projects & Tasks (if enabled)"
         - "⚙️ Settings & Configuration"
         - "🖥️ User Interface"
         - "🐳 Docker / Infrastructure"
@@ -122,10 +122,10 @@ body:
     id: service-status
     attributes:
       label: Service Status (check all that are working)
-      description: Which Archon services were running when the bug occurred?
+      description: Which ChipOS services were running when the bug occurred?
       options:
         - label: "🖥️ Frontend UI (http://localhost:3737)"
         - label: "⚙️ Main Server (http://localhost:8181)"
-        - label: "🔗 MCP Service (localhost:8051)" 
+        - label: "🔗 MCP Service (localhost:8051)"
         - label: "🤖 Agents Service (http://localhost:8052)"
         - label: "💾 Supabase Database (connected)"

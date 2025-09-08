@@ -1,5 +1,5 @@
 """
-Projects API endpoints for Archon
+Projects API endpoints for ChipOS
 
 Handles:
 - Project management (CRUD operations)

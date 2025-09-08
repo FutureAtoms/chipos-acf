@@ -1,11 +1,11 @@
 -- =====================================================
--- Archon Complete Database Setup
+-- ChipOS Complete Database Setup
 -- =====================================================
 -- This script combines all migrations into a single file
 -- for easy one-time database initialization
 --
 -- Run this script in your Supabase SQL Editor to set up
--- the complete Archon database schema and initial data
+-- the complete ChipOS database schema and initial data
 -- =====================================================
 
 -- =====================================================
@@ -793,7 +793,7 @@ Remember: Create production-ready data models.', 'System prompt for creating dat
 -- =====================================================
 -- SETUP COMPLETE
 -- =====================================================
--- Your Archon database is now fully configured!
+-- Your ChipOS database is now fully configured!
 --
 -- Next steps:
 -- 1. Add your OpenAI API key via the Settings UI

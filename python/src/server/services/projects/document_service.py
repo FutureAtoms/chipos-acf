@@ -1,5 +1,5 @@
 """
-Document Service Module for Archon
+Document Service Module for ChipOS
 
 This module provides core business logic for document operations within projects
 that can be shared between MCP tools and FastAPI endpoints.

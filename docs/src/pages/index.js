@@ -84,12 +84,12 @@ const ReactFlowDiagram = ({ reactFlowInstance, lucideIcons }) => {
       draggable: false
     },
     
-    // Archon in the center (raised higher)
+    // ChipOS in the center (raised higher)
     {
-      id: 'archon',
-      type: 'archon',
+      id: 'chipos',
+      type: 'chipos',
       position: { x: 330, y: 50 },
-      data: { label: 'ARCHON', subtitle: 'Knowledge Engine' },
+      data: { label: 'CHIPOS', subtitle: 'Knowledge Engine' },
       draggable: false
     },
     
@@ -111,14 +111,14 @@ const ReactFlowDiagram = ({ reactFlowInstance, lucideIcons }) => {
       draggable: false
     },
     
-    // Archon UI Control below Archon
+    // ChipOS UI Control below ChipOS
     {
-      id: 'archon-ui',
+      id: 'chipos-ui',
       type: 'ui-control',
       position: { x: 313, y: 350 },
       data: { 
-        title: 'Archon UI',
-        subtitle: 'Control all of Archon\'s Features'
+        title: 'ChipOS UI',
+        subtitle: 'Control all of ChipOS\'s Features'
       },
       draggable: false
     },
@@ -162,11 +162,11 @@ const ReactFlowDiagram = ({ reactFlowInstance, lucideIcons }) => {
 
   // Simplified edges - now 7 total connections (solid lines)
   const initialEdges = [
-    // IDEs to Archon (4 purple lines)
+    // IDEs to ChipOS (4 purple lines)
     { 
-      id: 'cursor-archon', 
+      id: 'cursor-chipos', 
       source: 'cursor', 
-      target: 'archon', 
+      target: 'chipos', 
       type: 'smoothstep',
       style: { 
         stroke: '#8b5cf6', 
@@ -174,9 +174,9 @@ const ReactFlowDiagram = ({ reactFlowInstance, lucideIcons }) => {
       }
     },
     { 
-      id: 'claude-archon', 
+      id: 'claude-chipos', 
       source: 'claude', 
-      target: 'archon', 
+      target: 'chipos', 
       type: 'smoothstep',
       style: { 
         stroke: '#8b5cf6', 
@@ -184,9 +184,9 @@ const ReactFlowDiagram = ({ reactFlowInstance, lucideIcons }) => {
       }
     },
     { 
-      id: 'windsurf-archon', 
+      id: 'windsurf-chipos', 
       source: 'windsurf', 
-      target: 'archon', 
+      target: 'chipos', 
       type: 'smoothstep',
       style: { 
         stroke: '#8b5cf6', 
@@ -194,9 +194,9 @@ const ReactFlowDiagram = ({ reactFlowInstance, lucideIcons }) => {
       }
     },
     { 
-      id: 'vscode-archon', 
+      id: 'vscode-chipos', 
       source: 'vscode', 
-      target: 'archon', 
+      target: 'chipos', 
       type: 'smoothstep',
       style: { 
         stroke: '#8b5cf6', 
@@ -204,12 +204,12 @@ const ReactFlowDiagram = ({ reactFlowInstance, lucideIcons }) => {
       }
     },
     
-    // Archon to Archon UI (1 blue line)
+    // ChipOS to ChipOS UI (1 blue line)
     { 
-      id: 'archon-ui', 
-      source: 'archon', 
+      id: 'chipos-ui', 
+      source: 'chipos', 
       sourceHandle: 'bottom',
-      target: 'archon-ui', 
+      target: 'chipos-ui', 
       type: 'smoothstep',
       style: { 
         stroke: '#3b82f6', 
@@ -217,10 +217,10 @@ const ReactFlowDiagram = ({ reactFlowInstance, lucideIcons }) => {
       }
     },
     
-    // Archon to containers (2 lines)
+    // ChipOS to containers (2 lines)
     { 
-      id: 'archon-knowledge', 
-      source: 'archon', 
+      id: 'chipos-knowledge', 
+      source: 'chipos', 
       sourceHandle: 'right',
       target: 'knowledge-sources', 
       type: 'smoothstep',
@@ -230,8 +230,8 @@ const ReactFlowDiagram = ({ reactFlowInstance, lucideIcons }) => {
       }
     },
     { 
-      id: 'archon-intelligence', 
-      source: 'archon', 
+      id: 'chipos-intelligence', 
+      source: 'chipos', 
       sourceHandle: 'right',
       target: 'project-intelligence', 
       type: 'smoothstep',
@@ -258,7 +258,7 @@ const ReactFlowDiagram = ({ reactFlowInstance, lucideIcons }) => {
         />
       </div>
     ),
-    archon: ({ data }) => (
+    chipos: ({ data }) => (
       <div className={styles.archonNode}>
         <Handle
           type="target"
@@ -267,7 +267,7 @@ const ReactFlowDiagram = ({ reactFlowInstance, lucideIcons }) => {
           style={{ background: '#8b5cf6', border: '2px solid #8b5cf6' }}
         />
 <img src="/img/Python-logo-notext.svg" alt="Python" className={styles.pythonIcon} />
-        <img src="/logo-neon.png" alt="Archon" className={styles.archonIcon} />
+        <img src="/logo-neon.png" alt="ChipOS" className={styles.archonIcon} />
         <div className={styles.archonText}>
           <h3>{data.label}</h3>
           <p>{data.subtitle}</p>
@@ -367,7 +367,7 @@ function HomepageHeader() {
       <div className="container">
         <div className={styles.heroContent}>
           <h1 className="hero__title">{siteConfig.title}</h1>
-          <p className="hero__subtitle">Supercharge your AI development workflow. Plug Cursor, Windsurf, or any AI IDE into Archon to unlock instant access to your business knowledge, technical docs, project requirements, and development tasks.</p>
+          <p className="hero__subtitle">Supercharge your AI development workflow. Plug Cursor, Windsurf, or any AI IDE into ChipOS to unlock instant access to your business knowledge, technical docs, project requirements, and development tasks.</p>
           <div className={styles.buttons}>
             <Link
               className="button button--green-neon button--lg"
@@ -529,7 +529,7 @@ function HomepageContent() {
             <div className="col col--8 col--offset-2">
               <h2>🎯 Next Steps</h2>
               <ol>
-                <li><strong><Link to="/getting-started">Set up Archon</Link></strong> - Get your knowledge engine running</li>
+                <li><strong><Link to="/getting-started">Set up ChipOS</Link></strong> - Get your knowledge engine running</li>
                 <li><strong><Link to="/mcp-overview">Connect your AI client</Link></strong> - Integrate with Cursor, Windsurf, or Claude Desktop</li>
                 <li><strong><Link to="/getting-started#building-your-knowledge-base">Build your knowledge base</Link></strong> - Start crawling and uploading content</li>
                 <li><strong><Link to="/rag">Optimize for your use case</Link></strong> - Configure RAG strategies</li>
@@ -545,7 +545,7 @@ function HomepageContent() {
           <div className="row">
             <div className="col col--8 col--offset-2 text--center">
               <hr />
-              <p><strong>Archon</strong> - <em>Supercharging AI IDE's with knowledge and tasks</em></p>
+              <p><strong>ChipOS</strong> - <em>Supercharging AI IDE's with knowledge and tasks</em></p>
             </div>
           </div>
         </div>

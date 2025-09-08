@@ -1,5 +1,5 @@
 """
-Project Service Module for Archon
+Project Service Module for ChipOS
 
 This module provides core business logic for project operations that can be
 shared between MCP tools and FastAPI endpoints. It follows the pattern of

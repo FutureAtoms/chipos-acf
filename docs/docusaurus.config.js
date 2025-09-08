@@ -2,15 +2,15 @@
 
 /** @type {import('@docusaurus/types').Config} */
 export default {
-  title: 'Archon',
+  title: 'ChipOS',
   tagline: 'Knowledge Engine for AI Coding Assistants',
   url: 'http://localhost:3838',
   baseUrl: '/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'favicon.png',
-  organizationName: 'archon',
-  projectName: 'archon',
+  organizationName: 'chipos',
+  projectName: 'chipos',
   
   markdown: {
     mermaid: true,
@@ -35,7 +35,7 @@ export default {
           path: 'docs',
           routeBasePath: '/',
           sidebarPath: './sidebars.js', // Enable proper sidebar
-          editUrl: 'https://github.com/coleam00/archon/edit/main/docs/',
+          editUrl: 'https://github.com/coleam00/chipos/edit/main/docs/',
           showLastUpdateTime: true,
           showLastUpdateAuthor: true,
         },
@@ -129,14 +129,14 @@ export default {
         respectPrefersColorScheme: false,
       },
       navbar: {
-        title: 'Archon',
+        title: 'ChipOS',
         logo: {
-          alt: 'Archon Logo',
+          alt: 'ChipOS Logo',
           src: 'logo-neon.png',
         },
         items: [
           {
-            href: 'https://github.com/coleam00/archon',
+            href: 'https://github.com/coleam00/chipos',
             label: 'GitHub',
             position: 'right',
           },
@@ -178,12 +178,12 @@ export default {
           {
             title: 'Community',
             items: [
-              { label: 'GitHub', href: 'https://github.com/coleam00/archon' },
-              { label: 'Issues', href: 'https://github.com/coleam00/archon/issues' },
+              { label: 'GitHub', href: 'https://github.com/coleam00/chipos' },
+              { label: 'Issues', href: 'https://github.com/coleam00/chipos/issues' },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Archon Project`,
+        copyright: `Copyright © ${new Date().getFullYear()} ChipOS Project`,
       },
     }),
 };

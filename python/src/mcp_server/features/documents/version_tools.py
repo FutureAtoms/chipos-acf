@@ -1,5 +1,5 @@
 """
-Simple version management tools for Archon MCP Server.
+Simple version management tools for ChipOS MCP Server.
 
 Provides separate, focused tools for version control operations.
 Supports versioning of documents, features, and other project data.

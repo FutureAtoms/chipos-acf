@@ -1,1 +1,1 @@
-"""Simplified test suite for Archon - Essential tests only."""
+"""Simplified test suite for ChipOS - Essential tests only."""

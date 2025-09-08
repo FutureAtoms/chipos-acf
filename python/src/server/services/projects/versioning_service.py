@@ -1,5 +1,5 @@
 """
-Versioning Service Module for Archon
+Versioning Service Module for ChipOS
 
 This module provides core business logic for document versioning operations
 that can be shared between MCP tools and FastAPI endpoints.

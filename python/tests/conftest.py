@@ -1,4 +1,4 @@
-"""Simple test configuration for Archon - Essential tests only."""
+"""Simple test configuration for ChipOS - Essential tests only."""
 
 import os
 from unittest.mock import MagicMock, patch

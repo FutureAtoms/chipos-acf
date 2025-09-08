@@ -1,8 +1,8 @@
-# Archon Architecture
+# ChipOS Architecture
 
 ## Overview
 
-Archon follows a **Vertical Slice Architecture** pattern where features are organized by business capability rather than technical layers. Each module is self-contained with its own API, business logic, and data access, making the system modular, maintainable, and ready for future microservice extraction if needed.
+ChipOS follows a **Vertical Slice Architecture** pattern where features are organized by business capability rather than technical layers. Each module is self-contained with its own API, business logic, and data access, making the system modular, maintainable, and ready for future microservice extraction if needed.
 
 ## Core Principles
 
@@ -15,7 +15,7 @@ Archon follows a **Vertical Slice Architecture** pattern where features are orga
 ## Directory Structure
 
 ```
-archon/
+chipos/
 ├── python/
 │   ├── src/
 │   │   ├── knowledge/                    # Knowledge Management Module
@@ -139,7 +139,7 @@ archon/
 │   │   │   │   │   └── tests/
 │   │   │   │   └── feature_tools.py    # Feature management
 │   │   │   ├── modules/                 # MCP modules
-│   │   │   │   └── archon.py          # Main Archon MCP module
+│   │   │   │   └── chipos.py          # Main ChipOS MCP module
 │   │   │   └── utils/                  # MCP utilities
 │   │   │       └── tool_utils.py
 │   │   │
@@ -197,7 +197,7 @@ archon/
 │       ├── test_service_integration.py
 │       └── fixtures/
 │
-├── archon-ui-main/                       # Frontend Application
+├── chipos-ui-main/                       # Frontend Application
 │   ├── src/
 │   │   ├── pages/                      # Page components
 │   │   │   ├── KnowledgeBasePage.tsx
@@ -240,7 +240,7 @@ archon/
 
 ### Knowledge Module (`src/knowledge/`)
 
-Core knowledge management functionality including web crawling, document processing, embeddings, and RAG search. This is the heart of Archon's knowledge engine.
+Core knowledge management functionality including web crawling, document processing, embeddings, and RAG search. This is the heart of ChipOS's knowledge engine.
 
 **Key Features:**
 
@@ -264,7 +264,7 @@ Project and task management system with AI-powered project generation. Currently
 
 ### MCP Server Module (`src/mcp_server/`)
 
-Model Context Protocol server that exposes Archon functionality to IDEs like Cursor and Windsurf.
+Model Context Protocol server that exposes ChipOS functionality to IDEs like Cursor and Windsurf.
 
 **Key Features:**
 
@@ -383,19 +383,19 @@ Each module can become its own service:
 # docker-compose.yml (future)
 services:
   knowledge:
-    image: archon-knowledge
+    image: chipos-knowledge
     ports: ["8001:8000"]
 
   projects:
-    image: archon-projects
+    image: chipos-projects
     ports: ["8002:8000"]
 
   mcp-server:
-    image: archon-mcp
+    image: chipos-mcp
     ports: ["8051:8051"]
 
   agents:
-    image: archon-agents
+    image: chipos-agents
     ports: ["8052:8052"]
 ```
 

@@ -1,7 +1,7 @@
 """
-FastAPI Backend for Archon Knowledge Engine
+FastAPI Backend for ChipOS Knowledge Engine
 
-This is the main entry point for the Archon backend API.
+This is the main entry point for the ChipOS backend API.
 It uses a modular approach with separate API modules for different functionality.
 
 Modules:
@@ -68,7 +68,7 @@ async def lifespan(app: FastAPI):
     _initialization_complete = False
 
     # Startup
-    logger.info("🚀 Starting Archon backend...")
+    logger.info("🚀 Starting ChipOS backend...")
 
     try:
         # Validate configuration FIRST - check for anon vs service key
@@ -81,7 +81,7 @@ async def lifespan(app: FastAPI):
 
         # Now that credentials are loaded, we can properly initialize logging
         # This must happen AFTER credentials so LOGFIRE_ENABLED is set from database
-        setup_logfire(service_name="archon-backend")
+        setup_logfire(service_name="chipos-backend")
 
         # Now we can safely use the logger
         logger.info("✅ Credentials initialized")
@@ -123,7 +123,7 @@ async def lifespan(app: FastAPI):
 
         # Mark initialization as complete
         _initialization_complete = True
-        api_logger.info("🎉 Archon backend started successfully!")
+        api_logger.info("🎉 ChipOS backend started successfully!")
 
     except Exception as e:
         api_logger.error(f"❌ Failed to start backend: {str(e)}")
@@ -133,7 +133,7 @@ async def lifespan(app: FastAPI):
 
     # Shutdown
     _initialization_complete = False
-    api_logger.info("🛑 Shutting down Archon backend...")
+    api_logger.info("🛑 Shutting down ChipOS backend...")
 
     try:
         # MCP Client cleanup not needed
@@ -159,8 +159,8 @@ async def lifespan(app: FastAPI):
 
 # Create FastAPI application
 app = FastAPI(
-    title="Archon Knowledge Engine API",
-    description="Backend API for the Archon knowledge management and project automation platform",
+    title="ChipOS Knowledge Engine API",
+    description="Backend API for the ChipOS knowledge management and project automation platform",
     version="1.0.0",
     lifespan=lifespan,
 )
@@ -209,7 +209,7 @@ app.include_router(bug_report_router)
 async def root():
     """Root endpoint returning API information."""
     return {
-        "name": "Archon Knowledge Engine API",
+        "name": "ChipOS Knowledge Engine API",
         "version": "1.0.0",
         "description": "Backend API for knowledge management and project automation",
         "status": "healthy",
@@ -227,7 +227,7 @@ async def health_check():
     if not _initialization_complete:
         return {
             "status": "initializing",
-            "service": "archon-backend",
+            "service": "chipos-backend",
             "timestamp": datetime.now().isoformat(),
             "message": "Backend is starting up, credentials loading...",
             "ready": False,
@@ -238,7 +238,7 @@ async def health_check():
     if not schema_status["valid"]:
         return {
             "status": "migration_required",
-            "service": "archon-backend",
+            "service": "chipos-backend",
             "timestamp": datetime.now().isoformat(),
             "ready": False,
             "migration_required": True,
@@ -249,7 +249,7 @@ async def health_check():
 
     return {
         "status": "healthy",
-        "service": "archon-backend",
+        "service": "chipos-backend",
         "timestamp": datetime.now().isoformat(),
         "ready": True,
         "credentials_loaded": True,

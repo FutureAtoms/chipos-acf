@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Archon documentation has been simplified to focus on developer-friendly reference material without excessive styling or marketing language.
+The ChipOS documentation has been simplified to focus on developer-friendly reference material without excessive styling or marketing language.
 
 ## Key Changes
 

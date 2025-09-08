@@ -1,5 +1,5 @@
 """
-Credential management service for Archon backend
+Credential management service for ChipOS backend
 
 Handles loading, storing, and accessing credentials with encryption for sensitive values.
 Credentials include API keys, service credentials, and application configuration.

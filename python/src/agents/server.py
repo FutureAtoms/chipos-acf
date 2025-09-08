@@ -77,7 +77,7 @@ async def fetch_credentials_from_server():
                         "Please set it in your .env file or environment."
                     )
                 response = await client.get(
-                    f"http://archon-server:{server_port}/internal/credentials/agents", timeout=10.0
+                    f"http://chipos-server:{server_port}/internal/credentials/agents", timeout=10.0
                 )
                 response.raise_for_status()
                 credentials = response.json()
@@ -141,7 +141,7 @@ async def lifespan(app: FastAPI):
 
 # Create FastAPI app
 app = FastAPI(
-    title="Archon Agents Service",
+    title="ChipOS Agents Service",
     description="Lightweight service hosting PydanticAI agents",
     version="1.0.0",
     lifespan=lifespan,
@@ -177,7 +177,7 @@ async def run_agent(request: AgentRequest):
         deps = {
             "context": request.context or {},
             "options": request.options or {},
-            "mcp_endpoint": os.getenv("MCP_SERVICE_URL", "http://archon-mcp:8051"),
+            "mcp_endpoint": os.getenv("MCP_SERVICE_URL", "http://chipos-mcp:8051"),
         }
 
         # Run the agent
@@ -245,9 +245,9 @@ async def stream_agent(agent_type: str, request: AgentRequest):
                 )
             else:
                 # Default dependencies
-                from .base_agent import ArchonDependencies
+                from .base_agent import ChipOSDependencies
 
-                deps = ArchonDependencies()
+                deps = ChipOSDependencies()
 
             # Use PydanticAI's run_stream method
             # run_stream returns an async context manager directly

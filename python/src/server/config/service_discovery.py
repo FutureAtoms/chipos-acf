@@ -63,12 +63,12 @@ class ServiceDiscovery:
 
     # Service name mappings
     SERVICE_NAMES = {
-        "api": "archon-server",
-        "mcp": "archon-mcp",
-        "agents": "archon-agents",
-        "archon-server": "archon-server",
-        "archon-mcp": "archon-mcp",
-        "archon-agents": "archon-agents",
+        "api": "chipos-server",
+        "mcp": "chipos-mcp",
+        "agents": "chipos-agents",
+        "chipos-server": "chipos-server",
+        "chipos-mcp": "chipos-mcp",
+        "chipos-agents": "chipos-agents",
     }
 
     @staticmethod
@@ -90,7 +90,7 @@ class ServiceDiscovery:
             protocol: Protocol to use (default: "http")
 
         Returns:
-            Full service URL (e.g., "http://archon-api:8080")
+            Full service URL (e.g., "http://chipos-api:8080")
         """
         cache_key = f"{protocol}://{service}"
         if cache_key in self._cache:
@@ -174,7 +174,7 @@ class ServiceDiscovery:
         return {
             service: self.get_service_url(service)
             for service in self.SERVICE_NAMES.keys()
-            if not service.startswith("archon-")  # Skip duplicates
+            if not service.startswith("chipos-")  # Skip duplicates
         }
 
     @property

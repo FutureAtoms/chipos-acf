@@ -1,5 +1,5 @@
 """
-Settings API endpoints for Archon
+Settings API endpoints for ChipOS
 
 Handles:
 - OpenAI API key management

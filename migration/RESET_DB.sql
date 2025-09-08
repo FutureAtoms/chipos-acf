@@ -1,8 +1,8 @@
 -- ======================================================================
--- ARCHON DATABASE RESET SCRIPT
+-- CHIPOS DATABASE RESET SCRIPT
 -- ======================================================================
 -- 
--- This script safely resets the entire Archon database by dropping all
+-- This script safely resets the entire ChipOS database by dropping all
 -- tables, types, functions, triggers, and policies with conditional checks
 -- and cascading drops to maintain referential integrity.
 --

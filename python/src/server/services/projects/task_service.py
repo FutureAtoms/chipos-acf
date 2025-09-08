@@ -1,5 +1,5 @@
 """
-Task Service Module for Archon
+Task Service Module for ChipOS
 
 This module provides core business logic for task operations that can be
 shared between MCP tools and FastAPI endpoints.

@@ -1,5 +1,5 @@
 """
-Source Linking Service Module for Archon
+Source Linking Service Module for ChipOS
 
 This module provides centralized logic for managing project-source relationships,
 handling both technical and business source associations.

@@ -1,5 +1,5 @@
 """
-Prompt Service Module for Archon
+Prompt Service Module for ChipOS
 
 This module provides a singleton service for managing AI agent prompts.
 Prompts are loaded from the database at startup and cached in memory for

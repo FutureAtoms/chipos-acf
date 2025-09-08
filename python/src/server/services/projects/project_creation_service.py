@@ -1,5 +1,5 @@
 """
-Project Creation Service Module for Archon
+Project Creation Service Module for ChipOS
 
 This module handles the complex project creation workflow including
 AI-assisted documentation generation and progress tracking.

@@ -17,14 +17,14 @@ from typing import Any
 from pydantic import BaseModel, Field
 from pydantic_ai import Agent, RunContext
 
-from .base_agent import ArchonDependencies, BaseAgent
+from .base_agent import ChipOSDependencies, BaseAgent
 from .mcp_client import get_mcp_client
 
 logger = logging.getLogger(__name__)
 
 
 @dataclass
-class DocumentDependencies(ArchonDependencies):
+class DocumentDependencies(ChipOSDependencies):
     """Dependencies for document operations."""
 
     project_id: str = ""  # Required but needs default value due to parent class having defaults

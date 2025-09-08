@@ -102,7 +102,7 @@ def process_batch(items):
 
 ## Architecture Overview
 
-Archon V2 Beta is a microservices-based knowledge management system with MCP (Model Context Protocol) integration:
+ChipOS V2 Beta is a microservices-based knowledge management system with MCP (Model Context Protocol) integration:
 
 - **Frontend (port 3737)**: React + TypeScript + Vite + TailwindCSS
   - **UI Strategy**: Radix UI primitives in `/features`, custom components in legacy `/components`
@@ -115,7 +115,7 @@ Archon V2 Beta is a microservices-based knowledge management system with MCP (Mo
 
 ## Development Commands
 
-### Frontend (archon-ui-main/)
+### Frontend (chipos-ui-main/)
 
 ```bash
 npm run dev              # Start development server on port 3737
@@ -185,7 +185,7 @@ docker-compose restart              # Restart services
 ### Testing
 
 ```bash
-# Frontend tests (from archon-ui-main/)
+# Frontend tests (from chipos-ui-main/)
 npm run test:coverage:stream       # Run with streaming output
 npm run test:ui                    # Run with Vitest UI
 
@@ -332,7 +332,7 @@ Use database values directly (no UI mapping):
 1. Create route handler in `python/src/server/api_routes/`
 2. Add service logic in `python/src/server/services/`
 3. Include router in `python/src/server/main.py`
-4. Update frontend service in `archon-ui-main/src/services/`
+4. Update frontend service in `chipos-ui-main/src/services/`
 
 ### Add a new UI component
 
@@ -345,15 +345,15 @@ For **features** directory (preferred for new components):
 
 For **legacy** components:
 
-1. Create component in `archon-ui-main/src/components/`
-2. Add to page in `archon-ui-main/src/pages/`
+1. Create component in `chipos-ui-main/src/components/`
+2. Add to page in `chipos-ui-main/src/pages/`
 3. Include any new API calls in services
-4. Add tests in `archon-ui-main/test/`
+4. Add tests in `chipos-ui-main/test/`
 
 ### Debug MCP connection issues
 
 1. Check MCP health: `curl http://localhost:8051/health`
-2. View MCP logs: `docker-compose logs archon-mcp`
+2. View MCP logs: `docker-compose logs chipos-mcp`
 3. Test tool execution via UI MCP page
 4. Verify Supabase connection and credentials
 
@@ -371,11 +371,11 @@ We enforce code quality through automated linting and type checking:
 
 When connected to Cursor/Windsurf:
 
-- `archon:perform_rag_query` - Search knowledge base
-- `archon:search_code_examples` - Find code snippets
-- `archon:manage_project` - Project operations
-- `archon:manage_task` - Task management
-- `archon:get_available_sources` - List knowledge sources
+- `chipos:perform_rag_query` - Search knowledge base
+- `chipos:search_code_examples` - Find code snippets
+- `chipos:manage_project` - Project operations
+- `chipos:manage_task` - Task management
+- `chipos:get_available_sources` - List knowledge sources
 
 ## Important Notes
 
