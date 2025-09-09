@@ -1,5 +1,5 @@
 import React from 'react';
-import { glassmorphism, compoundStyles } from '../../features/ui/primitives/styles';
+import { glassmorphism, compoundStyles, cn } from '../../features/ui/primitives/styles';
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   accentColor?: 'gold' | 'copper' | 'silver' | 'red' | 'dark' | 'none' | 'purple' | 'green' | 'pink' | 'blue' | 'orange' | 'gray' | 'cyan';
