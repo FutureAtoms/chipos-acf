@@ -141,7 +141,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               className={cn(
                 "relative flex items-center h-12 backdrop-blur-sm rounded-full border shadow-sm transition-all duration-300",
                 isSelected
-                  ? "bg-white/70 dark:bg-zinc-900/90 border-blue-300 dark:border-blue-500/50 dark:shadow-[0_0_10px_rgba(59,130,246,0.5)] hover:shadow-md dark:hover:shadow-[0_0_15px_rgba(59,130,246,0.7)]"
+                  ? "bg-white/70 dark:bg-zinc-900/90 border-blue-300 dark:border-blue-500/50 dark:shadow-[0_0_10px_rgba(255,184,77,0.5)] hover:shadow-md dark:hover:shadow-[0_0_15px_rgba(255,184,77,0.7)]"
                   : "bg-white/30 dark:bg-zinc-900/30 border-gray-300/50 dark:border-gray-700/50",
               )}
             >

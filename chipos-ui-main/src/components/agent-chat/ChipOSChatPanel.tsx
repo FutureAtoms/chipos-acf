@@ -460,7 +460,7 @@ export const ChipOSChatPanel: React.FC<ChipOSChatPanelProps> = (props) => {
 
           <div className="flex items-center gap-2">
             {/* Text input field */}
-            <div className="flex-1 backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30 border border-gray-200 dark:border-zinc-800/80 rounded-md px-3 py-2 focus-within:border-blue-500 focus-within:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-200">
+            <div className="flex-1 backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30 border border-gray-200 dark:border-zinc-800/80 rounded-md px-3 py-2 focus-within:border-blue-500 focus-within:shadow-[0_0_15px_rgba(255,184,77,0.5)] transition-all duration-200">
               <input
                 type="text"
                 value={inputValue}
@@ -495,7 +495,7 @@ export const ChipOSChatPanel: React.FC<ChipOSChatPanelProps> = (props) => {
                   isTyping || connectionStatus !== "online"
                     ? "opacity-30"
                     : "opacity-60 group-hover:opacity-100"
-                } shadow-[0_0_10px_rgba(59,130,246,0.3),inset_0_0_6px_rgba(59,130,246,0.2)] dark:shadow-[0_0_10px_rgba(59,130,246,0.6),inset_0_0_6px_rgba(59,130,246,0.4)] transition-all duration-300`}
+                } shadow-[0_0_10px_rgba(255,184,77,0.3),inset_0_0_6px_rgba(255,184,77,0.2)] dark:shadow-[0_0_10px_rgba(255,184,77,0.6),inset_0_0_6px_rgba(255,184,77,0.4)] transition-all duration-300`}
               ></div>
               {/* Inner glow effect */}
               <div
@@ -511,7 +511,7 @@ export const ChipOSChatPanel: React.FC<ChipOSChatPanelProps> = (props) => {
                   isTyping || connectionStatus !== "online"
                     ? "opacity-50"
                     : "opacity-90 group-hover:opacity-100"
-                } drop-shadow-[0_0_3px_rgba(59,130,246,0.5)] dark:drop-shadow-[0_0_3px_rgba(59,130,246,0.8)] transition-all duration-200`}
+                } drop-shadow-[0_0_3px_rgba(255,184,77,0.5)] dark:drop-shadow-[0_0_3px_rgba(255,184,77,0.8)] transition-all duration-200`}
               />
               {/* Shine effect */}
               <div className="absolute top-0 left-0 w-full h-[1px] bg-white/40 rounded-t-md"></div>

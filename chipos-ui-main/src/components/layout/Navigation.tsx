@@ -68,7 +68,7 @@ export function Navigation({ className }: NavigationProps) {
     <nav
       className={cn(
         "flex flex-col items-center gap-6 py-6 px-3",
-        "rounded-xl w-[72px]",
+        "rounded-xl w-[104px]",
         // Using glassmorphism from primitives
         glassmorphism.background.subtle,
         "border border-gray-200 dark:border-zinc-800/50",
@@ -83,35 +83,83 @@ export function Navigation({ className }: NavigationProps) {
             <Link
               to="/projects"
               className={cn(
-                "relative p-2 rounded-lg transition-all duration-300",
+                "relative p-3 rounded-lg transition-all duration-300",
                 "flex items-center justify-center",
                 "hover:bg-white/10 dark:hover:bg-white/5",
                 isProjectsActive && [
                   "bg-gradient-to-b from-white/20 to-white/5 dark:from-white/10 dark:to-black/20",
-                  "shadow-[0_5px_15px_-5px_rgba(59,130,246,0.3)] dark:shadow-[0_5px_15px_-5px_rgba(59,130,246,0.5)]",
+                  "shadow-[0_5px_15px_-5px_rgba(255,184,77,0.3)] dark:shadow-[0_5px_15px_-5px_rgba(255,184,77,0.5)]",
                   "transform scale-110",
                 ],
               )}
             >
-              <img
-                src="/logo-neon.png"
-                alt="ChipOS"
-                className={cn(
-                  "w-8 h-8 transition-all duration-300",
-                  isProjectsActive && "filter drop-shadow-[0_0_8px_rgba(59,130,246,0.7)]",
-                )}
-              />
+              <div className="relative w-16 h-16 transition-all duration-300">
+                {/* Outer glow layers */}
+                <div className={cn(
+                  "absolute inset-0 rounded-lg transition-all duration-300",
+                  "bg-gradient-to-br from-chip-gold/20 via-transparent to-chip-copper/10",
+                  "blur-sm opacity-60",
+                  isProjectsActive && "opacity-100 blur-md scale-110"
+                )} />
+                <div className={cn(
+                  "absolute inset-0 rounded-lg transition-all duration-300",
+                  "bg-gradient-to-br from-chip-gold/30 via-chip-gold/10 to-transparent",
+                  "blur-xs opacity-40",
+                  isProjectsActive && "opacity-70 blur-sm scale-105"
+                )} />
+                
+                {/* Embossed container */}
+                <div className={cn(
+                  "relative w-16 h-16 rounded-lg transition-all duration-300",
+                  "bg-gradient-to-br from-gray-100/80 via-gray-50/60 to-gray-200/40",
+                  "dark:from-chip-dark/90 dark:via-gray-900/70 dark:to-black/80",
+                  "shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] dark:shadow-[inset_0_1px_0_rgba(255,184,77,0.2)]",
+                  "shadow-[0_4px_8px_rgba(0,0,0,0.15)] dark:shadow-[0_4px_8px_rgba(0,0,0,0.4)]",
+                  "border border-gray-200/60 dark:border-chip-silver/20",
+                  isProjectsActive && [
+                    "shadow-[inset_0_1px_0_rgba(255,184,77,0.6)] dark:shadow-[inset_0_1px_0_rgba(255,184,77,0.4)]",
+                    "border-chip-gold/40 dark:border-chip-gold/30",
+                    "scale-105"
+                  ]
+                )}>
+                  <img
+                    src="/logo-neon.png"
+                    alt="ChipOS"
+                    className={cn(
+                      "w-16 h-16 transition-all duration-300 relative z-10",
+                      "filter saturate-110 contrast-105",
+                      "drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]",
+                      isProjectsActive && [
+                        "drop-shadow-[0_0_8px_rgba(255,184,77,0.6)]",
+                        "saturate-125 contrast-110"
+                      ]
+                    )}
+                  />
+                </div>
+              </div>
               {/* Active state decorations */}
               {isProjectsActive && (
                 <>
-                  <span className="absolute inset-0 rounded-lg border border-blue-300 dark:border-blue-500/30" />
-                  <span className="absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[2px] bg-blue-500 shadow-[0_0_10px_2px_rgba(59,130,246,0.4)] dark:shadow-[0_0_20px_5px_rgba(59,130,246,0.7)]" />
+                  <span className="absolute inset-0 rounded-lg border border-chip-gold/40 dark:border-chip-gold/30" />
+                  <span className="absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[2px] bg-gradient-to-r from-transparent via-chip-gold to-transparent" />
                 </>
               )}
             </Link>
           ) : (
-            <div className="p-2 rounded-lg opacity-50 cursor-not-allowed">
-              <img src="/logo-neon.png" alt="ChipOS" className="w-8 h-8 grayscale" />
+            <div className="p-3 rounded opacity-50 cursor-not-allowed">
+              <div className="relative w-16 h-16">
+                {/* Subtle glow for disabled state */}
+                <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-gray-300/20 via-transparent to-gray-400/10 blur-sm opacity-30" />
+                
+                {/* Embossed container for disabled state */}
+                <div className="relative w-16 h-16 rounded-lg bg-gradient-to-br from-gray-100/60 via-gray-50/40 to-gray-200/30 dark:from-gray-800/60 dark:via-gray-900/50 dark:to-black/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] dark:shadow-[inset_0_1px_0_rgba(192,192,192,0.1)] shadow-[0_2px_4px_rgba(0,0,0,0.1)] border border-gray-200/40 dark:border-gray-600/20">
+                  <img 
+                    src="/logo-neon.png" 
+                    alt="ChipOS" 
+                    className="w-16 h-16 grayscale filter saturate-50 contrast-90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.2)] relative z-10" 
+                  />
+                </div>
+              </div>
             </div>
           )}
         </TooltipTrigger>
@@ -140,12 +188,12 @@ export function Navigation({ className }: NavigationProps) {
                     isActive
                       ? [
                           "bg-gradient-to-b from-white/20 to-white/5 dark:from-white/10 dark:to-black/20",
-                          "text-blue-600 dark:text-blue-400",
-                          "shadow-[0_5px_15px_-5px_rgba(59,130,246,0.3)] dark:shadow-[0_5px_15px_-5px_rgba(59,130,246,0.5)]",
+                          "text-chip-copper dark:text-chip-gold",
+                          "shadow-[0_5px_15px_-5px_rgba(255,184,77,0.3)] dark:shadow-[0_5px_15px_-5px_rgba(255,184,77,0.5)]",
                         ]
                       : [
                           "text-gray-500 dark:text-zinc-500",
-                          "hover:text-blue-600 dark:hover:text-blue-400",
+                          "hover:text-chip-copper dark:hover:text-chip-gold",
                           "hover:bg-white/10 dark:hover:bg-white/5",
                         ],
                     !isEnabled && "opacity-50 cursor-not-allowed pointer-events-none",
@@ -157,11 +205,11 @@ export function Navigation({ className }: NavigationProps) {
                   }}
                 >
                   {item.icon}
-                  {/* Active state decorations with neon line */}
+                  {/* Active state decorations with circuit trace */}
                   {isActive && (
                     <>
-                      <span className="absolute inset-0 rounded-lg border border-blue-300 dark:border-blue-500/30" />
-                      <span className="absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[2px] bg-blue-500 shadow-[0_0_10px_2px_rgba(59,130,246,0.4)] dark:shadow-[0_0_20px_5px_rgba(59,130,246,0.7)]" />
+                      <span className="absolute inset-0 rounded border border-chip-gold/40 dark:border-chip-gold/30" />
+                      <span className="absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[2px] bg-gradient-to-r from-transparent via-chip-gold to-transparent" />
                     </>
                   )}
                 </Link>

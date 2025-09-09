@@ -50,8 +50,8 @@ export const Button: React.FC<ButtonProps> = ({
     purple: 'bg-purple-500 shadow-[0_0_10px_2px_rgba(168,85,247,0.4)] dark:shadow-[0_0_20px_5px_rgba(168,85,247,0.7)]',
     green: 'bg-emerald-500 shadow-[0_0_10px_2px_rgba(16,185,129,0.4)] dark:shadow-[0_0_20px_5px_rgba(16,185,129,0.7)]',
     pink: 'bg-pink-500 shadow-[0_0_10px_2px_rgba(236,72,153,0.4)] dark:shadow-[0_0_20px_5px_rgba(236,72,153,0.7)]',
-    blue: 'bg-blue-500 shadow-[0_0_10px_2px_rgba(59,130,246,0.4)] dark:shadow-[0_0_20px_5px_rgba(59,130,246,0.7)]',
-    cyan: 'bg-cyan-500 shadow-[0_0_10px_2px_rgba(34,211,238,0.4)] dark:shadow-[0_0_20px_5px_rgba(34,211,238,0.7)]',
+    blue: 'bg-blue-500 shadow-[0_0_10px_2px_rgba(255,184,77,0.4)] dark:shadow-[0_0_20px_5px_rgba(255,184,77,0.7)]',
+    cyan: 'bg-cyan-500 shadow-[0_0_10px_2px_rgba(255,184,77,0.4)] dark:shadow-[0_0_20px_5px_rgba(255,184,77,0.7)]',
     orange: 'bg-orange-500 shadow-[0_0_10px_2px_rgba(249,115,22,0.4)] dark:shadow-[0_0_20px_5px_rgba(249,115,22,0.7)]'
   };
   return <button className={`

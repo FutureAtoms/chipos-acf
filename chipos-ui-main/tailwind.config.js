@@ -46,6 +46,14 @@ module.exports = {content: [
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Chip-specific colors
+        chip: {
+          gold: "hsl(var(--chip-gold))",
+          copper: "hsl(var(--chip-copper))",
+          silver: "hsl(var(--chip-silver))",
+          dark: "hsl(var(--chip-dark))",
+          trace: "hsl(var(--chip-trace))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

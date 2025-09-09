@@ -57,7 +57,7 @@ export const KanbanColumn = ({
         isOver && "bg-gradient-to-b from-cyan-500/5 to-purple-500/5 dark:from-cyan-400/10 dark:to-purple-400/10",
         isOver && "border-t-2 border-t-cyan-400/50 dark:border-t-cyan-400/70",
         isOver &&
-          "shadow-[inset_0_2px_20px_rgba(34,211,238,0.15)] dark:shadow-[inset_0_2px_30px_rgba(34,211,238,0.25)]",
+          "shadow-[inset_0_2px_20px_rgba(255,184,77,0.15)] dark:shadow-[inset_0_2px_30px_rgba(255,184,77,0.25)]",
         isOver && "backdrop-blur-md",
       )}
     >

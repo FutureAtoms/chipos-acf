@@ -306,7 +306,7 @@ export const AddKnowledgeModal = ({
                   bg-blue-500/10 hover:bg-blue-500/20 
                   border-blue-500/30 hover:border-blue-500/50
                   text-blue-600 dark:text-blue-400
-                  hover:shadow-[0_0_15px_rgba(59,130,246,0.3)]
+                  hover:shadow-[0_0_15px_rgba(255,184,77,0.3)]
                   backdrop-blur-sm"
               >
                 <Upload className="w-6 h-6" />

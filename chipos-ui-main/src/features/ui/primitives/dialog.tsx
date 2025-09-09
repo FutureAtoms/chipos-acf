@@ -1,7 +1,7 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import React from "react";
-import { cn } from "./styles";
+import { cn, glassmorphism, compoundStyles } from "./styles";
 
 // Dialog Root and Trigger
 export const Dialog = DialogPrimitive.Root;
@@ -9,7 +9,7 @@ export const DialogTrigger = DialogPrimitive.Trigger;
 export const DialogPortal = DialogPrimitive.Portal;
 export const DialogClose = DialogPrimitive.Close;
 
-// Dialog Overlay with glassmorphism
+// Dialog Overlay with sophisticated chip-themed backdrop
 export const DialogOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
@@ -18,9 +18,14 @@ export const DialogOverlay = React.forwardRef<
     ref={ref}
     className={cn(
       "fixed inset-0 z-50",
-      "backdrop-blur-sm bg-black/50 dark:bg-black/70",
-      "data-[state=open]:animate-in data-[state=closed]:animate-out",
-      "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      // Sophisticated backdrop with chip-inspired depth
+      "backdrop-blur-md bg-gradient-to-br from-black/60 via-chip-dark/40 to-black/70",
+      "dark:bg-gradient-to-br dark:from-black/80 dark:via-chip-dark/60 dark:to-black/90",
+      // Enhanced animation with chip aesthetic
+      glassmorphism.animation.fadeIn,
+      "data-[state=open]:backdrop-blur-lg",
+      // Subtle ambient glow effect
+      "before:absolute before:inset-0 before:bg-gradient-to-br before:from-chip-gold/5 before:via-transparent before:to-chip-copper/3 before:animate-pulse before:duration-3000",
       className,
     )}
     {...props}
@@ -28,7 +33,7 @@ export const DialogOverlay = React.forwardRef<
 ));
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
-// Dialog Content with Tron-style glassmorphism
+// Dialog Content with sophisticated chip-themed matte embossed design
 export const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
@@ -41,23 +46,24 @@ export const DialogContent = React.forwardRef<
       ref={ref}
       className={cn(
         "fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2",
-        "p-6 rounded-md backdrop-blur-md",
-        "w-full max-w-2xl",
-        // Matching original glassmorphism
-        "bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30",
-        "border border-gray-200 dark:border-zinc-800/50",
-        "shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]",
-        // Top gradient bar (matching original)
-        "before:content-[''] before:absolute before:top-0 before:left-0 before:right-0",
-        "before:h-[2px] before:rounded-t-[4px]",
-        "before:bg-gradient-to-r before:from-cyan-500 before:to-fuchsia-500",
-        "before:shadow-[0_0_10px_2px_rgba(34,211,238,0.4)]",
-        "dark:before:shadow-[0_0_20px_5px_rgba(34,211,238,0.7)]",
-        // Top gradient glow (matching original)
-        "after:content-[''] after:absolute after:top-0 after:left-0 after:right-0",
-        "after:h-16 after:bg-gradient-to-b",
-        "after:from-cyan-100 after:to-white dark:after:from-cyan-500/20 dark:after:to-fuchsia-500/5",
-        "after:rounded-t-md after:pointer-events-none",
+        "p-8 rounded-xl backdrop-blur-lg",
+        "w-full max-w-2xl max-h-[90vh] overflow-y-auto",
+        // Sophisticated matte embossed glassmorphism
+        compoundStyles.floatingPanel,
+        glassmorphism.glow.moderate,
+        glassmorphism.shadow.elevated,
+        // Enhanced animations with chip aesthetic
+        glassmorphism.animation.slideIn,
+        "data-[state=open]:animate-in data-[state=closed]:animate-out",
+        "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+        "data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%]",
+        "data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]",
+        // Sophisticated circuit trace decoration
+        glassmorphism.circuit.traceTop,
+        // Enhanced gradient overlay for depth
+        "after:absolute after:top-0 after:left-0 after:right-0 after:h-20",
+        "after:bg-gradient-to-b after:from-chip-gold/8 after:via-chip-gold/3 after:to-transparent",
+        "after:rounded-t-xl after:pointer-events-none",
         className,
       )}
       {...props}
@@ -66,10 +72,14 @@ export const DialogContent = React.forwardRef<
       {showCloseButton && (
         <DialogPrimitive.Close
           className={cn(
-            "absolute right-4 top-4 z-20",
-            "text-gray-500 dark:text-gray-400",
-            "hover:text-gray-700 dark:hover:text-white",
-            "transition-colors",
+            "absolute right-6 top-6 z-20",
+            "p-2 rounded-lg",
+            "text-gray-600 dark:text-chip-silver",
+            glassmorphism.interactive.base,
+            "hover:bg-gray-100/80 dark:hover:bg-chip-dark/60",
+            "hover:text-chip-copper dark:hover:text-chip-gold",
+            "hover:scale-110",
+            glassmorphism.shadow.sm,
           )}
         >
           <X className="h-5 w-5" />
@@ -101,7 +111,7 @@ export const DialogFooter = React.forwardRef<HTMLDivElement, React.HTMLAttribute
 );
 DialogFooter.displayName = "DialogFooter";
 
-// Dialog Title
+// Dialog Title with sophisticated chip-themed gradient
 export const DialogTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
@@ -109,9 +119,14 @@ export const DialogTitle = React.forwardRef<
   <DialogPrimitive.Title
     ref={ref}
     className={cn(
-      "text-xl font-bold",
-      "bg-gradient-to-r from-cyan-400 to-fuchsia-500",
+      "text-2xl font-bold tracking-wide",
+      // Sophisticated chip-themed gradient text
+      "bg-gradient-to-r from-chip-copper via-chip-gold to-chip-copper",
+      "dark:from-chip-gold dark:via-chip-gold/80 dark:to-chip-copper",
       "text-transparent bg-clip-text",
+      // Enhanced text effects
+      "drop-shadow-[0_2px_4px_rgba(255,184,77,0.3)]",
+      "dark:drop-shadow-[0_2px_4px_rgba(255,184,77,0.5)]",
       className,
     )}
     {...props}
@@ -119,14 +134,20 @@ export const DialogTitle = React.forwardRef<
 ));
 DialogTitle.displayName = DialogPrimitive.Title.displayName;
 
-// Dialog Description
+// Dialog Description with sophisticated chip-themed styling  
 export const DialogDescription = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Description>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn("text-sm text-gray-600 dark:text-gray-400", className)}
+    className={cn(
+      "text-sm font-medium leading-relaxed",
+      "text-gray-700 dark:text-chip-silver/90",
+      // Subtle embossed text effect
+      "drop-shadow-[0_1px_2px_rgba(0,0,0,0.1)] dark:drop-shadow-[0_1px_2px_rgba(255,184,77,0.1)]",
+      className
+    )}
     {...props}
   />
 ));

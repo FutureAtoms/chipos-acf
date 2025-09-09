@@ -1,6 +1,6 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import React from "react";
-import { cn } from "./styles";
+import { cn, glassmorphism, compoundStyles } from "./styles";
 
 // Provider
 export const TooltipProvider = TooltipPrimitive.Provider;
@@ -11,37 +11,40 @@ export const Tooltip = TooltipPrimitive.Root;
 // Trigger
 export const TooltipTrigger = TooltipPrimitive.Trigger;
 
-// Content with Tron glassmorphism
+// Content with sophisticated chip-themed matte embossed design
 export const TooltipContent = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
->(({ className, sideOffset = 4, ...props }, ref) => (
+>(({ className, sideOffset = 6, ...props }, ref) => (
   <TooltipPrimitive.Portal>
     <TooltipPrimitive.Content
       ref={ref}
       sideOffset={sideOffset}
       className={cn(
-        "z-50 overflow-hidden rounded-md px-3 py-1.5 text-xs",
-        // Tron-style glassmorphism with neon glow - dark in both themes
+        "z-50 overflow-hidden rounded-lg px-4 py-2 text-sm font-medium",
+        // Sophisticated matte embossed glassmorphism
+        glassmorphism.background.strong,
+        glassmorphism.border.gold,
+        glassmorphism.shadow.depth.gold,
+        glassmorphism.glow.moderate,
         "backdrop-blur-md",
-        "bg-gradient-to-b from-gray-900/95 to-black/95",
-        "dark:from-gray-900/95 dark:to-black/95",
-        // Neon border with cyan glow
-        "border border-cyan-500/50 dark:border-cyan-400/50",
-        "shadow-[0_0_15px_rgba(34,211,238,0.5)] dark:shadow-[0_0_15px_rgba(34,211,238,0.7)]",
-        // Text colors - cyan in both modes for Tron effect
-        "text-cyan-100 dark:text-cyan-100",
-        // Subtle inner glow effect
-        "before:absolute before:inset-0 before:rounded-md",
-        "before:bg-gradient-to-b before:from-cyan-500/10 before:to-transparent",
-        "before:pointer-events-none",
-        // Animation with more dramatic entrance
-        "animate-in fade-in-0 zoom-in-95",
-        "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
-        "data-[side=bottom]:slide-in-from-top-2",
-        "data-[side=left]:slide-in-from-right-2",
-        "data-[side=right]:slide-in-from-left-2",
-        "data-[side=top]:slide-in-from-bottom-2",
+        // Sophisticated chip-themed text styling
+        "text-chip-copper dark:text-chip-gold",
+        "drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_1px_2px_rgba(255,184,77,0.3)]",
+        // Enhanced circuit trace decoration
+        glassmorphism.circuit.traceTop,
+        "before:rounded-t-lg",
+        // Subtle inner gradient for depth
+        "after:absolute after:inset-0 after:rounded-lg after:pointer-events-none",
+        "after:bg-gradient-to-b after:from-chip-gold/8 after:via-transparent after:to-chip-copper/3",
+        // Sophisticated animations with chip aesthetic
+        glassmorphism.animation.fadeIn,
+        glassmorphism.animation.slideIn,
+        glassmorphism.animation.slideFromTop,
+        glassmorphism.animation.slideFromBottom,
+        glassmorphism.animation.slideFromLeft,
+        glassmorphism.animation.slideFromRight,
+        "data-[state=open]:scale-100 data-[state=closed]:scale-95",
         className,
       )}
       {...props}

@@ -162,7 +162,7 @@ export const ButtonPlayground: React.FC = () => {
       : layer2Color === 'pink'
         ? 'linear-gradient(to bottom, rgba(236,72,153,0.3), rgba(219,39,119,0.3))'
         : layer2Color === 'blue'
-          ? 'linear-gradient(to bottom, rgba(59,130,246,0.3), rgba(37,99,235,0.3))'
+          ? 'linear-gradient(to bottom, rgba(255,184,77,0.3), rgba(37,99,235,0.3))'
           : layer2Color === 'green'
             ? 'linear-gradient(to bottom, rgba(34,197,94,0.3), rgba(22,163,74,0.3))'
             : 'linear-gradient(to bottom, rgba(239,68,68,0.3), rgba(220,38,38,0.3))'};
@@ -242,8 +242,8 @@ export const ButtonPlayground: React.FC = () => {
       },
       blue: {
         border: 'border-blue-400/30',
-        glow: 'rgba(59,130,246,0.6)',
-        glowDark: 'rgba(59,130,246,0.5)',
+        glow: 'rgba(255,184,77,0.6)',
+        glowDark: 'rgba(255,184,77,0.5)',
         text: 'rgb(59 130 246)'
       },
       green: {
@@ -272,7 +272,7 @@ export const ButtonPlayground: React.FC = () => {
       none: 'rgba(229,231,235,0.5)',
       purple: 'rgba(196,181,253,0.6)',
       pink: 'rgba(251,207,232,0.6)',
-      blue: 'rgba(147,197,253,0.6)',
+      blue: 'rgba(255,184,77,0.6)',
       green: 'rgba(134,239,172,0.6)',
       red: 'rgba(252,165,165,0.6)'
     };

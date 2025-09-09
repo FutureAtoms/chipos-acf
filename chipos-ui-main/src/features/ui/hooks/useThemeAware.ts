@@ -18,9 +18,9 @@ export function useThemeAware() {
   // Get theme-specific colors for Tron effects
   const glowColors = {
     cyan: isDark
-      ? "rgba(34,211,238,0.7)" // Stronger glow in dark
-      : "rgba(34,211,238,0.4)", // Softer glow in light
-    blue: isDark ? "rgba(59,130,246,0.7)" : "rgba(59,130,246,0.4)",
+      ? "rgba(255,184,77,0.7)" // Stronger glow in dark
+      : "rgba(255,184,77,0.4)", // Softer glow in light
+    blue: isDark ? "rgba(255,184,77,0.7)" : "rgba(255,184,77,0.4)",
     purple: isDark ? "rgba(168,85,247,0.7)" : "rgba(168,85,247,0.4)",
   };
 
@@ -63,8 +63,8 @@ export const themeStyles = {
 
   // Glow effects for Tron aesthetic
   glow: {
-    cyan: "shadow-[0_0_10px_2px_rgba(34,211,238,0.4)] dark:shadow-[0_0_20px_5px_rgba(34,211,238,0.7)]",
-    blue: "shadow-[0_0_10px_2px_rgba(59,130,246,0.4)] dark:shadow-[0_0_20px_5px_rgba(59,130,246,0.7)]",
+    cyan: "shadow-[0_0_10px_2px_rgba(255,184,77,0.4)] dark:shadow-[0_0_20px_5px_rgba(255,184,77,0.7)]",
+    blue: "shadow-[0_0_10px_2px_rgba(255,184,77,0.4)] dark:shadow-[0_0_20px_5px_rgba(255,184,77,0.7)]",
     purple: "shadow-[0_0_10px_2px_rgba(168,85,247,0.4)] dark:shadow-[0_0_20px_5px_rgba(168,85,247,0.7)]",
   },
 };

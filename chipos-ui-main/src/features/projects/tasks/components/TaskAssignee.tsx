@@ -33,8 +33,8 @@ const getAssigneeStyles = (assigneeName: Assignee) => {
   switch (assigneeName) {
     case "User":
       return {
-        glow: "shadow-[0_0_10px_rgba(59,130,246,0.4)]",
-        hoverGlow: "hover:shadow-[0_0_12px_rgba(59,130,246,0.5)]",
+        glow: "shadow-[0_0_10px_rgba(255,184,77,0.4)]",
+        hoverGlow: "hover:shadow-[0_0_12px_rgba(255,184,77,0.5)]",
         color: "text-blue-600 dark:text-blue-400",
       };
     case "AI IDE Agent":
@@ -45,14 +45,14 @@ const getAssigneeStyles = (assigneeName: Assignee) => {
       };
     case "ChipOS":
       return {
-        glow: "shadow-[0_0_10px_rgba(34,211,238,0.4)]",
-        hoverGlow: "hover:shadow-[0_0_12px_rgba(34,211,238,0.5)]",
+        glow: "shadow-[0_0_10px_rgba(255,184,77,0.4)]",
+        hoverGlow: "hover:shadow-[0_0_12px_rgba(255,184,77,0.5)]",
         color: "text-cyan-600 dark:text-cyan-400",
       };
     default:
       return {
-        glow: "shadow-[0_0_10px_rgba(59,130,246,0.4)]",
-        hoverGlow: "hover:shadow-[0_0_12px_rgba(59,130,246,0.5)]",
+        glow: "shadow-[0_0_10px_rgba(255,184,77,0.4)]",
+        hoverGlow: "hover:shadow-[0_0_12px_rgba(255,184,77,0.5)]",
         color: "text-blue-600 dark:text-blue-400",
       };
   }

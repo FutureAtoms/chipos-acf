@@ -51,17 +51,17 @@ export const PowerButton: React.FC<PowerButtonProps> = ({
     },
     blue: {
       border: 'border-blue-400',
-      glow: 'shadow-[0_0_15px_rgba(59,130,246,0.8)]',
-      glowHover: 'hover:shadow-[0_0_25px_rgba(59,130,246,1)]',
+      glow: 'shadow-[0_0_15px_rgba(255,184,77,0.8)]',
+      glowHover: 'hover:shadow-[0_0_25px_rgba(255,184,77,1)]',
       fill: 'bg-blue-400',
-      innerGlow: 'shadow-[inset_0_0_10px_rgba(59,130,246,0.8)]'
+      innerGlow: 'shadow-[inset_0_0_10px_rgba(255,184,77,0.8)]'
     },
     cyan: {
       border: 'border-cyan-400',
-      glow: 'shadow-[0_0_15px_rgba(34,211,238,0.8)]',
-      glowHover: 'hover:shadow-[0_0_25px_rgba(34,211,238,1)]',
+      glow: 'shadow-[0_0_15px_rgba(255,184,77,0.8)]',
+      glowHover: 'hover:shadow-[0_0_25px_rgba(255,184,77,1)]',
       fill: 'bg-cyan-400',
-      innerGlow: 'shadow-[inset_0_0_10px_rgba(34,211,238,0.8)]'
+      innerGlow: 'shadow-[inset_0_0_10px_rgba(255,184,77,0.8)]'
     },
     orange: {
       border: 'border-orange-400',

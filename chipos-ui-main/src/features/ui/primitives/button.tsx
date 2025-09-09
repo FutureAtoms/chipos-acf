@@ -1,8 +1,8 @@
 import React from "react";
-import { cn } from "./styles";
+import { cn, glassmorphism, compoundStyles } from "./styles";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "default" | "destructive" | "outline" | "ghost" | "link" | "cyan";
+  variant?: "default" | "destructive" | "outline" | "ghost" | "link" | "gold";
   size?: "default" | "sm" | "lg" | "icon" | "xs";
   loading?: boolean;
   children: React.ReactNode;
@@ -11,77 +11,91 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "default", size = "default", loading = false, disabled, children, ...props }, ref) => {
     const baseStyles = cn(
-      "inline-flex items-center justify-center rounded-md font-medium",
-      "transition-all duration-300",
-      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500",
-      "disabled:pointer-events-none disabled:opacity-50",
+      "relative inline-flex items-center justify-center rounded-lg font-medium overflow-hidden",
+      glassmorphism.interactive.base,
+      glassmorphism.interactive.focus,
+      "disabled:pointer-events-none disabled:opacity-40 disabled:grayscale disabled:shadow-none",
       loading && "cursor-wait",
     );
 
     const variants = {
       default: cn(
-        "backdrop-blur-md",
-        "bg-gradient-to-b from-cyan-500/90 to-cyan-600/90",
-        "dark:from-cyan-400/80 dark:to-cyan-500/80",
-        "text-white dark:text-gray-900",
-        "border border-cyan-400/30 dark:border-cyan-300/30",
-        "hover:from-cyan-400 hover:to-cyan-500",
-        "dark:hover:from-cyan-300 dark:hover:to-cyan-400",
-        "hover:shadow-[0_0_20px_rgba(34,211,238,0.5)]",
-        "dark:hover:shadow-[0_0_25px_rgba(34,211,238,0.7)]",
+        // Primary sophisticated embossed button
+        "bg-gradient-to-br from-chip-gold/20 via-chip-gold/15 to-chip-gold/25 dark:from-chip-gold/30 dark:via-chip-gold/20 dark:to-chip-gold/35",
+        "text-chip-copper dark:text-chip-gold font-semibold",
+        "border border-chip-gold/40 dark:border-chip-gold/35",
+        glassmorphism.shadow.depth.gold,
+        glassmorphism.glow.moderate,
+        "hover:shadow-[inset_0_3px_0_rgba(255,184,77,0.4),0_6px_12px_rgba(255,184,77,0.3),0_12px_24px_rgba(0,0,0,0.1)]",
+        "hover:scale-[1.02] hover:border-chip-gold/50",
+        "active:scale-[0.98]",
+        glassmorphism.shadow.depth.pressed.replace("active:", "active:"),
+        "before:absolute before:inset-0 before:bg-gradient-to-br before:from-chip-gold/10 before:via-transparent before:to-chip-copper/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:-z-10",
       ),
       destructive: cn(
-        "backdrop-blur-md",
-        "bg-gradient-to-b from-red-500/90 to-red-600/90",
-        "dark:from-red-400/80 dark:to-red-500/80",
-        "text-white",
-        "border border-red-400/30 dark:border-red-300/30",
-        "hover:from-red-400 hover:to-red-500",
-        "dark:hover:from-red-300 dark:hover:to-red-400",
-        "hover:shadow-[0_0_20px_rgba(239,68,68,0.5)]",
-        "dark:hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]",
+        // Sophisticated destructive button with red chip aesthetic
+        "bg-gradient-to-br from-red-500/20 via-red-600/15 to-red-700/25 dark:from-red-600/30 dark:via-red-700/20 dark:to-red-800/35",
+        "text-red-800 dark:text-red-300 font-semibold",
+        "border border-red-600/40 dark:border-red-500/35",
+        "shadow-[inset_0_2px_0_rgba(239,68,68,0.3),inset_0_-1px_0_rgba(0,0,0,0.1),0_4px_8px_rgba(239,68,68,0.2),0_8px_16px_rgba(0,0,0,0.1)]",
+        "hover:shadow-[inset_0_3px_0_rgba(239,68,68,0.4),0_6px_12px_rgba(239,68,68,0.3),0_12px_24px_rgba(0,0,0,0.1)]",
+        "hover:scale-[1.02] hover:border-red-500/50",
+        "active:scale-[0.98]",
+        glassmorphism.shadow.depth.pressed.replace("active:", "active:"),
+        "before:absolute before:inset-0 before:bg-gradient-to-br before:from-red-500/10 before:via-transparent before:to-red-700/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:-z-10",
       ),
       outline: cn(
-        "backdrop-blur-md",
-        "bg-gradient-to-b from-white/50 to-white/30",
-        "dark:from-gray-900/50 dark:to-black/50",
-        "text-gray-900 dark:text-cyan-100",
-        "border border-gray-300/50 dark:border-cyan-500/50",
-        "hover:from-white/70 hover:to-white/50",
-        "dark:hover:from-gray-900/70 dark:hover:to-black/70",
-        "hover:border-cyan-500/50 dark:hover:border-cyan-400/50",
-        "hover:shadow-[0_0_15px_rgba(34,211,238,0.3)]",
-        "dark:hover:shadow-[0_0_20px_rgba(34,211,238,0.5)]",
+        // Sophisticated outlined button with matte finish
+        glassmorphism.background.subtle,
+        "text-gray-700 dark:text-chip-gold font-medium",
+        glassmorphism.shadow.depth.default,
+        glassmorphism.glow.subtle,
+        "hover:scale-[1.01]",
+        "hover:shadow-[inset_0_2px_0_rgba(255,184,77,0.2),0_4px_8px_rgba(255,184,77,0.15),0_8px_16px_rgba(0,0,0,0.1)]",
+        "hover:border-chip-gold/40",
+        "active:scale-[0.99]",
+        glassmorphism.shadow.depth.pressed.replace("active:", "active:"),
       ),
       ghost: cn(
-        "text-gray-700 dark:text-cyan-100",
-        "hover:bg-gray-100/50 dark:hover:bg-cyan-500/10",
-        "hover:backdrop-blur-md",
+        // Sophisticated ghost button with hover embossing
+        "text-gray-700 dark:text-chip-gold font-medium",
+        glassmorphism.interactive.base,
+        "hover:bg-gradient-to-br hover:from-gray-100/70 hover:via-gray-50/50 hover:to-gray-200/40",
+        "dark:hover:from-chip-dark/70 dark:hover:via-gray-900/50 dark:hover:to-black/60",
+        "hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.3)] dark:hover:shadow-[inset_0_1px_0_rgba(255,184,77,0.15)]",
+        "hover:border hover:border-gray-200/50 dark:hover:border-chip-silver/20",
+        "hover:scale-[1.01]",
+        "active:scale-[0.99]",
+        glassmorphism.glow.subtle.replace("before:", "hover:before:"),
       ),
       link: cn(
-        "text-cyan-600 dark:text-cyan-400",
+        // Sophisticated link button with subtle embossing
+        "text-chip-copper dark:text-chip-gold font-medium",
         "underline-offset-4 hover:underline",
-        "hover:text-cyan-500 dark:hover:text-cyan-300",
+        "hover:text-chip-gold dark:hover:text-chip-gold/80",
+        "hover:drop-shadow-[0_2px_4px_rgba(255,184,77,0.3)]",
+        "transition-all duration-200",
       ),
-      cyan: cn(
-        "backdrop-blur-md",
-        "bg-gradient-to-b from-cyan-100/80 to-white/60",
-        "dark:from-cyan-500/20 dark:to-cyan-500/10",
-        "text-cyan-700 dark:text-cyan-100",
-        "border border-cyan-300/50 dark:border-cyan-500/50",
-        "hover:from-cyan-200/90 hover:to-cyan-100/70",
-        "dark:hover:from-cyan-400/30 dark:hover:to-cyan-500/20",
-        "hover:shadow-[0_0_20px_rgba(34,211,238,0.5)]",
-        "dark:hover:shadow-[0_0_25px_rgba(34,211,238,0.7)]",
+      gold: cn(
+        // Premium gold variant with full sophistication
+        glassmorphism.background.gold,
+        glassmorphism.shadow.depth.gold,
+        glassmorphism.glow.intense,
+        "text-chip-copper dark:text-chip-gold font-semibold",
+        "hover:scale-[1.02]",
+        "hover:shadow-[inset_0_3px_0_rgba(255,184,77,0.5),0_8px_16px_rgba(255,184,77,0.4),0_16px_32px_rgba(0,0,0,0.1)]",
+        "active:scale-[0.98]",
+        glassmorphism.shadow.depth.pressed.replace("active:", "active:"),
+        "before:absolute before:inset-0 before:bg-gradient-to-br before:from-chip-gold/15 before:via-transparent before:to-chip-copper/10 before:opacity-60 hover:before:opacity-100 before:transition-opacity before:duration-300 before:-z-10",
       ),
     };
 
     const sizes = {
-      default: "h-10 px-4 py-2",
-      sm: "h-9 rounded-md px-3",
-      lg: "h-11 rounded-md px-8",
-      icon: "h-10 w-10",
-      xs: "h-7 px-2 text-xs",
+      default: "h-11 px-6 py-3 text-sm",
+      sm: "h-9 px-4 py-2 text-xs",
+      lg: "h-13 px-8 py-4 text-base",
+      icon: "h-11 w-11 p-0",
+      xs: "h-8 px-3 py-1 text-xs",
     };
 
     return (
@@ -92,21 +106,35 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {loading && (
-          <svg
-            className="mr-2 h-4 w-4 animate-spin"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            aria-label="Loading"
-            role="img"
-          >
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            />
-          </svg>
+          <div className="relative mr-3 h-4 w-4">
+            {/* Outer glow ring */}
+            <div className="absolute inset-0 animate-spin">
+              <svg
+                className="h-full w-full drop-shadow-[0_0_4px_rgba(255,184,77,0.6)]"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                aria-label="Loading"
+                role="img"
+              >
+                <circle 
+                  className="opacity-20" 
+                  cx="12" 
+                  cy="12" 
+                  r="10" 
+                  stroke="currentColor" 
+                  strokeWidth="3" 
+                />
+                <path
+                  className="opacity-90 drop-shadow-[0_0_2px_rgba(255,184,77,0.8)]"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                />
+              </svg>
+            </div>
+            {/* Inner chip-style core */}
+            <div className="absolute inset-[6px] rounded-full bg-gradient-to-br from-chip-gold/30 to-chip-copper/20 animate-pulse border border-chip-gold/40" />
+          </div>
         )}
         {children}
       </button>

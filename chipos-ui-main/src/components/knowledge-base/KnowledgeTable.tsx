@@ -277,7 +277,7 @@ const GroupedKnowledgeTableRow: React.FC<GroupedKnowledgeTableRowProps> = ({
             onMouseEnter={() => setShowTooltip(true)}
             onMouseLeave={() => setShowTooltip(false)}
           >
-            <div className="flex items-center gap-1 px-2 py-1 bg-blue-500/20 border border-blue-500/40 rounded-full backdrop-blur-sm shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300">
+            <div className="flex items-center gap-1 px-2 py-1 bg-blue-500/20 border border-blue-500/40 rounded-full backdrop-blur-sm shadow-[0_0_15px_rgba(255,184,77,0.3)] hover:shadow-[0_0_20px_rgba(255,184,77,0.5)] transition-all duration-300">
               <Globe className="w-3 h-3 text-blue-400" />
               <span className="text-xs text-blue-400 font-medium">{groupedItem.items.length}</span>
             </div>

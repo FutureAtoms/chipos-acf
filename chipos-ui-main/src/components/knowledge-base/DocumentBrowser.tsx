@@ -156,7 +156,7 @@ export const DocumentBrowser: React.FC<DocumentBrowserProps> = ({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Blue accent line at the top */}
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-500 to-cyan-500 shadow-[0_0_20px_5px_rgba(59,130,246,0.5)]"></div>
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-500 to-cyan-500 shadow-[0_0_20px_5px_rgba(255,184,77,0.5)]"></div>
 
         {/* Sidebar */}
         <div className="w-80 bg-gray-950/50 border-r border-gray-800 flex flex-col overflow-hidden">
@@ -209,7 +209,7 @@ export const DocumentBrowser: React.FC<DocumentBrowserProps> = ({
                   onClick={() => setSelectedChunkId(chunk.id)}
                   className={`w-full text-left p-3 mb-1 rounded-lg transition-all duration-200 ${
                     selectedChunk?.id === chunk.id
-                      ? 'bg-blue-500/20 border border-blue-500/40 shadow-[0_0_15px_rgba(59,130,246,0.2)]'
+                      ? 'bg-blue-500/20 border border-blue-500/40 shadow-[0_0_15px_rgba(255,184,77,0.2)]'
                       : 'hover:bg-gray-800/50 border border-transparent'
                   }`}
                 >

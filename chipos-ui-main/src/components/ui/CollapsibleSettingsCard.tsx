@@ -57,8 +57,8 @@ export const CollapsibleSettingsCard: React.FC<CollapsibleSettingsCardProps> = (
     purple: 'text-purple-500 filter drop-shadow-[0_0_8px_rgba(168,85,247,0.8)]',
     green: 'text-green-500 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.8)]',
     pink: 'text-pink-500 filter drop-shadow-[0_0_8px_rgba(236,72,153,0.8)]',
-    blue: 'text-blue-500 filter drop-shadow-[0_0_8px_rgba(59,130,246,0.8)]',
-    cyan: 'text-cyan-500 filter drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]',
+    blue: 'text-blue-500 filter drop-shadow-[0_0_8px_rgba(255,184,77,0.8)]',
+    cyan: 'text-cyan-500 filter drop-shadow-[0_0_8px_rgba(255,184,77,0.8)]',
     orange: 'text-orange-500 filter drop-shadow-[0_0_8px_rgba(249,115,22,0.8)]'
   };
 

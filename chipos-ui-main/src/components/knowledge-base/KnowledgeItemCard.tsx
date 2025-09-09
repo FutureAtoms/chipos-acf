@@ -410,8 +410,8 @@ export const KnowledgeItemCard = ({
                   <div className={`flex items-center gap-1 px-2 py-1 rounded-full backdrop-blur-sm transition-all duration-300 ${
                     item.metadata.source_type === 'url'
                       ? item.metadata.knowledge_type === 'technical'
-                        ? 'bg-blue-500/20 border border-blue-500/40 shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]'
-                        : 'bg-cyan-500/20 border border-cyan-500/40 shadow-[0_0_15px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.5)]'
+                        ? 'bg-blue-500/20 border border-blue-500/40 shadow-[0_0_15px_rgba(255,184,77,0.3)] hover:shadow-[0_0_20px_rgba(255,184,77,0.5)]'
+                        : 'bg-cyan-500/20 border border-cyan-500/40 shadow-[0_0_15px_rgba(255,184,77,0.3)] hover:shadow-[0_0_20px_rgba(255,184,77,0.5)]'
                       : item.metadata.knowledge_type === 'technical'
                         ? 'bg-purple-500/20 border border-purple-500/40 shadow-[0_0_15px_rgba(168,85,247,0.3)] hover:shadow-[0_0_20px_rgba(168,85,247,0.5)]'
                         : 'bg-pink-500/20 border border-pink-500/40 shadow-[0_0_15px_rgba(236,72,153,0.3)] hover:shadow-[0_0_20px_rgba(236,72,153,0.5)]'

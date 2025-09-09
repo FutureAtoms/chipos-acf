@@ -111,7 +111,7 @@ export const EdgeLitEffect: React.FC<{
 }> = ({ color = "blue", className = "" }) => {
   // Color mappings for different edge-lit colors
   const colorMap = {
-    blue: "bg-blue-500 shadow-[0_0_10px_2px_rgba(59,130,246,0.4)] dark:shadow-[0_0_20px_5px_rgba(59,130,246,0.7)]",
+    blue: "bg-blue-500 shadow-[0_0_10px_2px_rgba(255,184,77,0.4)] dark:shadow-[0_0_20px_5px_rgba(255,184,77,0.7)]",
     purple:
       "bg-purple-500 shadow-[0_0_10px_2px_rgba(168,85,247,0.4)] dark:shadow-[0_0_20px_5px_rgba(168,85,247,0.7)]",
     green:

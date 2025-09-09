@@ -82,7 +82,7 @@ export const TaskCardActions: React.FC<TaskCardActionsProps> = ({
             "bg-cyan-100/80 dark:bg-cyan-500/20",
             "text-cyan-600 dark:text-cyan-400",
             "hover:bg-cyan-200 dark:hover:bg-cyan-500/30",
-            "hover:shadow-[0_0_10px_rgba(34,211,238,0.3)]",
+            "hover:shadow-[0_0_10px_rgba(255,184,77,0.3)]",
           )}
           aria-label={`Edit ${taskTitle}`}
         >

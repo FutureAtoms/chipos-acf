@@ -1,6 +1,6 @@
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import React from "react";
-import { cn, glassmorphism } from "./styles";
+import { cn, glassmorphism, compoundStyles } from "./styles";
 
 // Root
 export const AlertDialog = AlertDialogPrimitive.Root;
@@ -39,14 +39,14 @@ export const AlertDialogContent = React.forwardRef<
 >(({ className, variant = "default", ...props }, ref) => {
   const variantStyles = {
     default: cn(
-      "before:bg-gradient-to-r before:from-cyan-500 before:to-fuchsia-500",
-      "before:shadow-[0_0_10px_2px_rgba(34,211,238,0.4)]",
-      "dark:before:shadow-[0_0_20px_5px_rgba(34,211,238,0.7)]",
+      "before:bg-gradient-to-r before:from-chip-gold before:to-chip-copper",
+      "before:shadow-[0_0_12px_3px_rgba(255,184,77,0.5)]",
+      "dark:before:shadow-[0_0_20px_6px_rgba(255,184,77,0.8)]",
     ),
     destructive: cn(
-      "before:bg-red-500",
-      "before:shadow-[0_0_10px_2px_rgba(239,68,68,0.4)]",
-      "dark:before:shadow-[0_0_20px_5px_rgba(239,68,68,0.7)]",
+      "before:bg-gradient-to-r before:from-red-500 before:to-red-600",
+      "before:shadow-[0_0_12px_3px_rgba(239,68,68,0.5)]",
+      "dark:before:shadow-[0_0_20px_6px_rgba(239,68,68,0.8)]",
     ),
   };
 

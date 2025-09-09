@@ -28,7 +28,7 @@ export const TabsTrigger = React.forwardRef<
   const colorMap = {
     blue: {
       text: "data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400",
-      glow: "data-[state=active]:bg-blue-500 data-[state=active]:shadow-[0_0_10px_2px_rgba(59,130,246,0.4)] dark:data-[state=active]:shadow-[0_0_20px_5px_rgba(59,130,246,0.7)]",
+      glow: "data-[state=active]:bg-blue-500 data-[state=active]:shadow-[0_0_10px_2px_rgba(255,184,77,0.4)] dark:data-[state=active]:shadow-[0_0_20px_5px_rgba(255,184,77,0.7)]",
       hover: "hover:text-blue-500 dark:hover:text-blue-400/70",
     },
     purple: {
@@ -48,7 +48,7 @@ export const TabsTrigger = React.forwardRef<
     },
     cyan: {
       text: "data-[state=active]:text-cyan-600 dark:data-[state=active]:text-cyan-400",
-      glow: "data-[state=active]:bg-cyan-500 data-[state=active]:shadow-[0_0_10px_2px_rgba(34,211,238,0.4)] dark:data-[state=active]:shadow-[0_0_20px_5px_rgba(34,211,238,0.7)]",
+      glow: "data-[state=active]:bg-cyan-500 data-[state=active]:shadow-[0_0_10px_2px_rgba(255,184,77,0.4)] dark:data-[state=active]:shadow-[0_0_20px_5px_rgba(255,184,77,0.7)]",
       hover: "hover:text-cyan-500 dark:hover:text-cyan-400/70",
     },
     green: {

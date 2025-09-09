@@ -152,7 +152,7 @@ export const ComboBox = React.forwardRef<HTMLButtonElement, ComboBoxProps>(
                   "text-gray-900 dark:text-white",
                   "placeholder-gray-500 dark:placeholder-gray-400",
                   "focus:outline-none focus:border-cyan-400",
-                  "focus:shadow-[0_0_10px_rgba(34,211,238,0.2)]",
+                  "focus:shadow-[0_0_10px_rgba(255,184,77,0.2)]",
                   "transition-all duration-200",
                 )}
               />

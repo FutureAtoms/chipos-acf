@@ -123,16 +123,16 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   const transitionStyles = "transition-all duration-200 ease-in-out";
 
   // Subtle highlight effect for related tasks
-  const highlightGlow = isHighlighted ? "border-cyan-400/50 shadow-[0_0_8px_rgba(34,211,238,0.2)]" : "";
+  const highlightGlow = isHighlighted ? "border-cyan-400/50 shadow-[0_0_8px_rgba(255,184,77,0.2)]" : "";
 
   // Selection styling with glassmorphism
   const selectionGlow = isSelected
-    ? "border-blue-500 shadow-[0_0_12px_rgba(59,130,246,0.4)] bg-blue-50/30 dark:bg-blue-900/20"
+    ? "border-blue-500 shadow-[0_0_12px_rgba(255,184,77,0.4)] bg-blue-50/30 dark:bg-blue-900/20"
     : "";
 
   // Beautiful hover effect with glowing borders
   const hoverEffectClasses =
-    "group-hover:border-cyan-400/70 dark:group-hover:border-cyan-500/50 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.4)] dark:group-hover:shadow-[0_0_15px_rgba(34,211,238,0.6)]";
+    "group-hover:border-cyan-400/70 dark:group-hover:border-cyan-500/50 group-hover:shadow-[0_0_15px_rgba(255,184,77,0.4)] dark:group-hover:shadow-[0_0_15px_rgba(255,184,77,0.6)]";
 
   return (
     // biome-ignore lint/a11y/useSemanticElements: Drag-and-drop card with react-dnd - requires div for drag handle

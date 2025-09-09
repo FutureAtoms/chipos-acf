@@ -132,9 +132,9 @@ export const NeonButton = React.forwardRef<HTMLButtonElement, NeonButtonProps>((
       },
       blue: {
         border: 'border-blue-400/30',
-        glow: 'rgba(59,130,246,0.6)',
-        glowDark: 'rgba(59,130,246,0.5)',
-        aurora: 'rgba(59,130,246,0.8)',
+        glow: 'rgba(255,184,77,0.6)',
+        glowDark: 'rgba(255,184,77,0.5)',
+        aurora: 'rgba(255,184,77,0.8)',
         auroraDark: 'rgba(37,99,235,0.6)',
         text: 'rgb(59 130 246)', // blue-500
         textRgb: '59, 130, 246'

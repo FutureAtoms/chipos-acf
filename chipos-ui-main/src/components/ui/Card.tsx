@@ -1,8 +1,9 @@
 import React from 'react';
+import { glassmorphism, compoundStyles } from '../../features/ui/primitives/styles';
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  accentColor?: 'purple' | 'green' | 'pink' | 'blue' | 'cyan' | 'orange' | 'none';
-  variant?: 'default' | 'bordered';
+  accentColor?: 'gold' | 'copper' | 'silver' | 'red' | 'dark' | 'none' | 'purple' | 'green' | 'pink' | 'blue' | 'orange' | 'gray' | 'cyan';
+  variant?: 'default' | 'bordered' | 'chip';
 }
 export const Card: React.FC<CardProps> = ({
   children,
@@ -11,78 +12,139 @@ export const Card: React.FC<CardProps> = ({
   className = '',
   ...props
 }) => {
+  // Map legacy colors to new chip-themed colors
+  const colorMapping: Record<string, string> = {
+    'purple': 'gold',
+    'green': 'copper',
+    'pink': 'copper',
+    'blue': 'silver',
+    'orange': 'gold',
+    'gray': 'dark',
+    'cyan': 'silver',
+  };
+  
+  // Use mapped color or original if it's already in the new set
+  const mappedColor = colorMapping[accentColor] || accentColor;
+  
   const accentColorMap = {
-    purple: {
-      glow: 'before:shadow-[0_0_10px_2px_rgba(168,85,247,0.4)] dark:before:shadow-[0_0_20px_5px_rgba(168,85,247,0.7)]',
-      line: 'before:bg-purple-500',
-      border: 'border-purple-300 dark:border-purple-500/30',
-      gradientFrom: 'from-purple-100 dark:from-purple-500/20',
-      gradientTo: 'to-white dark:to-purple-500/5'
+    gold: {
+      trace: glassmorphism.circuit.traceTop,
+      border: 'border-chip-gold/40 dark:border-chip-gold/30',
+      shadow: glassmorphism.shadow.depth.gold,
+      glow: glassmorphism.glow.moderate,
+      background: glassmorphism.background.gold,
+      gradientOverlay: 'after:bg-gradient-to-br after:from-chip-gold/10 after:via-transparent after:to-chip-copper/5 after:opacity-60',
     },
-    green: {
-      glow: 'before:shadow-[0_0_10px_2px_rgba(16,185,129,0.4)] dark:before:shadow-[0_0_20px_5px_rgba(16,185,129,0.7)]',
-      line: 'before:bg-emerald-500',
-      border: 'border-emerald-300 dark:border-emerald-500/30',
-      gradientFrom: 'from-emerald-100 dark:from-emerald-500/20',
-      gradientTo: 'to-white dark:to-emerald-500/5'
+    copper: {
+      trace: glassmorphism.circuit.traceTop.replace('chip-gold', 'chip-copper'),
+      border: 'border-chip-copper/40 dark:border-chip-copper/30',
+      shadow: glassmorphism.shadow.depth.copper,
+      glow: glassmorphism.glow.moderate.replace('chip-gold', 'chip-copper'),
+      background: glassmorphism.background.copper,
+      gradientOverlay: 'after:bg-gradient-to-br after:from-chip-copper/10 after:via-transparent after:to-chip-copper/8 after:opacity-50',
     },
-    pink: {
-      glow: 'before:shadow-[0_0_10px_2px_rgba(236,72,153,0.4)] dark:before:shadow-[0_0_20px_5px_rgba(236,72,153,0.7)]',
-      line: 'before:bg-pink-500',
-      border: 'border-pink-300 dark:border-pink-500/30',
-      gradientFrom: 'from-pink-100 dark:from-pink-500/20',
-      gradientTo: 'to-white dark:to-pink-500/5'
+    silver: {
+      trace: glassmorphism.circuit.traceTop.replace('chip-gold', 'chip-silver'),
+      border: 'border-chip-silver/40 dark:border-chip-silver/30',
+      shadow: glassmorphism.shadow.depth.silver,
+      glow: glassmorphism.glow.moderate.replace('chip-gold', 'chip-silver').replace('chip-copper', 'chip-silver'),
+      background: glassmorphism.background.silver,
+      gradientOverlay: 'after:bg-gradient-to-br after:from-chip-silver/10 after:via-transparent after:to-gray-300/5 after:opacity-40',
     },
-    blue: {
-      glow: 'before:shadow-[0_0_10px_2px_rgba(59,130,246,0.4)] dark:before:shadow-[0_0_20px_5px_rgba(59,130,246,0.7)]',
-      line: 'before:bg-blue-500',
-      border: 'border-blue-300 dark:border-blue-500/30',
-      gradientFrom: 'from-blue-100 dark:from-blue-500/20',
-      gradientTo: 'to-white dark:to-blue-500/5'
+    red: {
+      trace: 'before:absolute before:top-0 before:left-0 before:right-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-red-500 before:to-transparent',
+      border: 'border-red-500/40 dark:border-red-400/30',
+      shadow: 'shadow-[inset_0_2px_0_rgba(239,68,68,0.3),inset_0_-1px_0_rgba(0,0,0,0.1),0_4px_8px_rgba(239,68,68,0.2),0_8px_16px_rgba(0,0,0,0.1)]',
+      glow: 'before:absolute before:inset-0 before:rounded-[inherit] before:bg-gradient-to-br before:from-red-500/15 before:via-transparent before:to-red-700/8 before:blur-md before:opacity-50 before:scale-110 before:-z-10',
+      background: 'bg-gradient-to-br from-red-500/15 via-red-600/8 to-red-700/20 dark:from-red-600/25 dark:via-red-700/15 dark:to-red-800/30',
+      gradientOverlay: 'after:bg-gradient-to-br after:from-red-500/8 after:via-transparent after:to-red-700/5 after:opacity-40',
     },
-    cyan: {
-      glow: 'before:shadow-[0_0_10px_2px_rgba(34,211,238,0.4)] dark:before:shadow-[0_0_20px_5px_rgba(34,211,238,0.7)]',
-      line: 'before:bg-cyan-500',
-      border: 'border-cyan-300 dark:border-cyan-500/30',
-      gradientFrom: 'from-cyan-100 dark:from-cyan-500/20',
-      gradientTo: 'to-white dark:to-cyan-500/5'
-    },
-    orange: {
-      glow: 'before:shadow-[0_0_10px_2px_rgba(249,115,22,0.4)] dark:before:shadow-[0_0_20px_5px_rgba(249,115,22,0.7)]',
-      line: 'before:bg-orange-500',
-      border: 'border-orange-300 dark:border-orange-500/30',
-      gradientFrom: 'from-orange-100 dark:from-orange-500/20',
-      gradientTo: 'to-white dark:to-orange-500/5'
+    dark: {
+      trace: 'before:absolute before:top-0 before:left-0 before:right-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-gray-600 before:to-transparent',
+      border: 'border-gray-600/40 dark:border-gray-500/30',
+      shadow: glassmorphism.shadow.depth.default,
+      glow: glassmorphism.glow.subtle.replace('chip-gold', 'gray-400').replace('chip-copper', 'gray-500'),
+      background: 'bg-gradient-to-br from-gray-200/15 via-gray-300/8 to-gray-400/20 dark:from-gray-700/25 dark:via-gray-800/15 dark:to-gray-900/30',
+      gradientOverlay: 'after:bg-gradient-to-br after:from-gray-400/8 after:via-transparent after:to-gray-600/5 after:opacity-30',
     },
     none: {
+      trace: '',
+      border: 'border-gray-200/60 dark:border-chip-silver/20',
+      shadow: glassmorphism.shadow.depth.default,
       glow: '',
-      line: '',
-      border: 'border-gray-200 dark:border-zinc-800/50',
-      gradientFrom: 'from-gray-50 dark:from-white/5',
-      gradientTo: 'to-white dark:to-transparent'
+      background: glassmorphism.background.subtle,
+      gradientOverlay: '',
     }
   };
+  
   const variantClasses = {
-    default: 'border',
-    bordered: 'border'
+    default: cn(
+      glassmorphism.background.card,
+      glassmorphism.border.default,
+      glassmorphism.shadow.depth.default,
+      "rounded-lg relative overflow-hidden"
+    ),
+    bordered: cn(
+      glassmorphism.background.strong,
+      "border-2 rounded-lg",
+      glassmorphism.shadow.depth.default,
+      glassmorphism.glow.subtle,
+      "relative overflow-hidden"
+    ),
+    chip: cn(
+      glassmorphism.background.card,
+      glassmorphism.shadow.depth.default,
+      glassmorphism.glow.moderate,
+      glassmorphism.circuit.traceTop,
+      "rounded-sm border relative overflow-hidden",
+      "before:rounded-t-sm after:absolute after:top-2 after:left-2 after:w-2 after:h-2 after:rounded-full after:bg-chip-gold/40 dark:after:bg-chip-gold/60 after:shadow-[0_0_4px_hsl(var(--chip-gold)/0.5)]"
+    )
   };
-  return <div className={`
-        relative p-4 rounded-md backdrop-blur-md
-        bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30
-        ${variantClasses[variant]} ${accentColorMap[accentColor].border}
-        shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]
-        hover:shadow-[0_15px_40px_-15px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_15px_40px_-15px_rgba(0,0,0,0.9)]
-        transition-all duration-300
-        ${accentColor !== 'none' ? `
-          before:content-[""] before:absolute before:top-[0px] before:left-[1px] before:right-[1px] before:h-[2px] 
-          before:rounded-t-[4px]
-          ${accentColorMap[accentColor].line} ${accentColorMap[accentColor].glow}
-          after:content-[""] after:absolute after:top-0 after:left-0 after:right-0 after:h-16
-          after:bg-gradient-to-b ${accentColorMap[accentColor].gradientFrom} ${accentColorMap[accentColor].gradientTo}
-          after:rounded-t-md after:pointer-events-none
-        ` : ''}
-        ${className}
-      `} {...props}>
-      <div className="relative z-10">{children}</div>
-    </div>;
+  
+  // Get the accent styles using the mapped color
+  const accentStyles = accentColorMap[mappedColor] || accentColorMap.none;
+  
+  return (
+    <div
+      className={cn(
+        "relative p-4 transition-all duration-300",
+        variantClasses[variant],
+        accentStyles.border,
+        accentStyles.shadow,
+        glassmorphism.interactive.base,
+        "hover:scale-[1.01]",
+        // Enhanced hover effects with sophisticated depth
+        "hover:shadow-[0_6px_16px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_6px_16px_rgba(0,0,0,0.5)]",
+        mappedColor !== 'none' && [
+          accentStyles.glow,
+          accentStyles.background
+        ],
+        className
+      )}
+      {...props}
+    >
+      {/* Sophisticated trace decoration for accent colors */}
+      {mappedColor !== 'none' && (
+        <div className={cn("absolute top-0 left-0 right-0", accentStyles.trace)} />
+      )}
+      
+      {/* Enhanced gradient overlay for depth */}
+      {mappedColor !== 'none' && accentStyles.gradientOverlay && (
+        <div className={cn(
+          "absolute top-0 left-0 right-0 h-16 rounded-t pointer-events-none",
+          accentStyles.gradientOverlay
+        )} />
+      )}
+      
+      {/* Chip indicator for chip variant */}
+      {variant === 'chip' && (
+        <div className="absolute top-3 left-3 w-2 h-2 rounded-full bg-chip-gold/50 dark:bg-chip-gold/70 shadow-[0_0_6px_hsl(var(--chip-gold)/0.6)] animate-pulse" />
+      )}
+      
+      {/* Content with proper layering */}
+      <div className="relative z-10">
+        {children}
+      </div>
+    </div>
+  );
 };
