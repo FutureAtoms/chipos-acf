@@ -8,3 +8,6 @@ PRPs/completed/
 .zed
 tmp/
 temp/
+
+# macOS system files
+.DS_Store
