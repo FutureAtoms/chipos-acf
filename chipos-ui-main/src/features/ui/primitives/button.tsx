@@ -2,7 +2,7 @@ import React from "react";
 import { cn, glassmorphism, compoundStyles } from "./styles";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "default" | "destructive" | "outline" | "ghost" | "link" | "gold";
+  variant?: "default" | "destructive" | "outline" | "ghost" | "link" | "gold" | "cyan" | "yellow";
   size?: "default" | "sm" | "lg" | "icon" | "xs";
   loading?: boolean;
   children: React.ReactNode;
@@ -11,82 +11,109 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "default", size = "default", loading = false, disabled, children, ...props }, ref) => {
     const baseStyles = cn(
-      "relative inline-flex items-center justify-center rounded-lg font-medium overflow-hidden",
-      glassmorphism.interactive.base,
-      glassmorphism.interactive.focus,
+      "relative inline-flex items-center justify-center font-mono font-medium overflow-hidden",
+      "focus:outline-none focus:ring-2 focus:ring-cyber-cyan/50 focus:ring-offset-2 focus:ring-offset-cyber-black",
       "disabled:pointer-events-none disabled:opacity-40 disabled:grayscale disabled:shadow-none",
       loading && "cursor-wait",
     );
 
     const variants = {
       default: cn(
-        // Primary sophisticated embossed button
-        "bg-gradient-to-br from-chip-gold/20 via-chip-gold/15 to-chip-gold/25 dark:from-chip-gold/30 dark:via-chip-gold/20 dark:to-chip-gold/35",
-        "text-chip-copper dark:text-chip-gold font-semibold",
-        "border border-chip-gold/40 dark:border-chip-gold/35",
-        glassmorphism.shadow.depth.gold,
-        glassmorphism.glow.moderate,
-        "hover:shadow-[inset_0_3px_0_rgba(255,184,77,0.4),0_6px_12px_rgba(255,184,77,0.3),0_12px_24px_rgba(0,0,0,0.1)]",
-        "hover:scale-[1.02] hover:border-chip-gold/50",
+        // Cyberpunk primary button with neon cyan glow
+        "cyber-button",
+        "bg-gradient-to-r from-cyber-dark/90 via-cyber-black/80 to-cyber-dark/90",
+        "text-cyber-cyan font-semibold uppercase tracking-wider text-xs",
+        "border border-cyber-cyan/50",
+        "shadow-neon-cyan",
+        "hover:shadow-neon-cyan hover:bg-cyber-cyan/10",
+        "hover:scale-[1.02] hover:border-cyber-cyan",
         "active:scale-[0.98]",
-        glassmorphism.shadow.depth.pressed.replace("active:", "active:"),
-        "before:absolute before:inset-0 before:bg-gradient-to-br before:from-chip-gold/10 before:via-transparent before:to-chip-copper/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:-z-10",
+        "transition-all duration-300",
+        "before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-cyber-cyan/20 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-500",
       ),
       destructive: cn(
-        // Sophisticated destructive button with red chip aesthetic
-        "bg-gradient-to-br from-red-500/20 via-red-600/15 to-red-700/25 dark:from-red-600/30 dark:via-red-700/20 dark:to-red-800/35",
-        "text-red-800 dark:text-red-300 font-semibold",
-        "border border-red-600/40 dark:border-red-500/35",
-        "shadow-[inset_0_2px_0_rgba(239,68,68,0.3),inset_0_-1px_0_rgba(0,0,0,0.1),0_4px_8px_rgba(239,68,68,0.2),0_8px_16px_rgba(0,0,0,0.1)]",
-        "hover:shadow-[inset_0_3px_0_rgba(239,68,68,0.4),0_6px_12px_rgba(239,68,68,0.3),0_12px_24px_rgba(0,0,0,0.1)]",
-        "hover:scale-[1.02] hover:border-red-500/50",
+        // Cyberpunk destructive button with red neon
+        "cyber-button",
+        "bg-cyber-black/80",
+        "text-cyber-red font-semibold uppercase tracking-wider text-xs",
+        "border border-cyber-red/50",
+        "shadow-[0_0_5px_hsl(var(--cyber-red)),0_0_10px_hsl(var(--cyber-red)),0_0_20px_hsl(var(--cyber-red)/0.3)]",
+        "hover:shadow-[0_0_10px_hsl(var(--cyber-red)),0_0_20px_hsl(var(--cyber-red)),0_0_30px_hsl(var(--cyber-red)/0.5)]",
+        "hover:bg-cyber-red/10 hover:border-cyber-red",
+        "hover:scale-[1.02]",
         "active:scale-[0.98]",
-        glassmorphism.shadow.depth.pressed.replace("active:", "active:"),
-        "before:absolute before:inset-0 before:bg-gradient-to-br before:from-red-500/10 before:via-transparent before:to-red-700/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:-z-10",
+        "transition-all duration-300",
       ),
       outline: cn(
-        // Sophisticated outlined button with matte finish
-        glassmorphism.background.subtle,
-        "text-gray-700 dark:text-chip-gold font-medium",
-        glassmorphism.shadow.depth.default,
-        glassmorphism.glow.subtle,
+        // Cyberpunk outline button with magenta accents
+        "bg-cyber-darker/50 backdrop-blur-sm",
+        "text-cyber-magenta font-medium uppercase tracking-wide text-xs",
+        "border border-cyber-magenta/40",
+        "hover:border-cyber-magenta/70 hover:bg-cyber-magenta/5",
+        "hover:shadow-[0_0_8px_hsl(var(--cyber-magenta)/0.4)]",
         "hover:scale-[1.01]",
-        "hover:shadow-[inset_0_2px_0_rgba(255,184,77,0.2),0_4px_8px_rgba(255,184,77,0.15),0_8px_16px_rgba(0,0,0,0.1)]",
-        "hover:border-chip-gold/40",
         "active:scale-[0.99]",
-        glassmorphism.shadow.depth.pressed.replace("active:", "active:"),
+        "transition-all duration-300",
       ),
       ghost: cn(
-        // Sophisticated ghost button with hover embossing
-        "text-gray-700 dark:text-chip-gold font-medium",
-        glassmorphism.interactive.base,
-        "hover:bg-gradient-to-br hover:from-gray-100/70 hover:via-gray-50/50 hover:to-gray-200/40",
-        "dark:hover:from-chip-dark/70 dark:hover:via-gray-900/50 dark:hover:to-black/60",
-        "hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.3)] dark:hover:shadow-[inset_0_1px_0_rgba(255,184,77,0.15)]",
-        "hover:border hover:border-gray-200/50 dark:hover:border-chip-silver/20",
+        // Cyberpunk ghost button with subtle glow
+        "text-cyber-cyan/70 font-medium uppercase tracking-wide text-xs",
+        "hover:text-cyber-cyan hover:bg-cyber-dark/30",
+        "hover:shadow-[0_0_6px_hsl(var(--cyber-cyan)/0.3)]",
         "hover:scale-[1.01]",
         "active:scale-[0.99]",
-        glassmorphism.glow.subtle.replace("before:", "hover:before:"),
+        "transition-all duration-300",
+        "border border-transparent hover:border-cyber-cyan/30",
       ),
       link: cn(
-        // Sophisticated link button with subtle embossing
-        "text-chip-copper dark:text-chip-gold font-medium",
+        // Cyberpunk link with holographic effect
+        "text-cyber-cyan font-medium uppercase tracking-wide",
         "underline-offset-4 hover:underline",
-        "hover:text-chip-gold dark:hover:text-chip-gold/80",
-        "hover:drop-shadow-[0_2px_4px_rgba(255,184,77,0.3)]",
+        "hover:text-shadow-neon-cyan",
         "transition-all duration-200",
+        "relative overflow-hidden",
+        "hover:animate-glitch",
       ),
       gold: cn(
-        // Premium gold variant with full sophistication
-        glassmorphism.background.gold,
-        glassmorphism.shadow.depth.gold,
-        glassmorphism.glow.intense,
-        "text-chip-copper dark:text-chip-gold font-semibold",
+        // Cyberpunk premium yellow variant
+        "cyber-button",
+        "bg-gradient-to-r from-cyber-dark/90 via-cyber-black/80 to-cyber-dark/90",
+        "text-cyber-yellow font-bold uppercase tracking-wider text-xs",
+        "border border-cyber-yellow/60",
+        "shadow-neon-yellow",
+        "hover:shadow-[0_0_15px_hsl(var(--cyber-yellow)),0_0_25px_hsl(var(--cyber-yellow)),0_0_35px_hsl(var(--cyber-yellow)/0.4)]",
+        "hover:bg-cyber-yellow/10 hover:border-cyber-yellow",
         "hover:scale-[1.02]",
-        "hover:shadow-[inset_0_3px_0_rgba(255,184,77,0.5),0_8px_16px_rgba(255,184,77,0.4),0_16px_32px_rgba(0,0,0,0.1)]",
         "active:scale-[0.98]",
-        glassmorphism.shadow.depth.pressed.replace("active:", "active:"),
-        "before:absolute before:inset-0 before:bg-gradient-to-br before:from-chip-gold/15 before:via-transparent before:to-chip-copper/10 before:opacity-60 hover:before:opacity-100 before:transition-opacity before:duration-300 before:-z-10",
+        "transition-all duration-300",
+        "before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-cyber-yellow/20 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-500",
+      ),
+      cyan: cn(
+        // Cyberpunk cyan variant for consistency
+        "cyber-button",
+        "bg-gradient-to-r from-cyber-dark/90 via-cyber-black/80 to-cyber-dark/90",
+        "text-cyber-cyan font-semibold uppercase tracking-wider text-xs",
+        "border border-cyber-cyan/50",
+        "shadow-neon-cyan",
+        "hover:shadow-neon-cyan hover:bg-cyber-cyan/10",
+        "hover:scale-[1.02] hover:border-cyber-cyan",
+        "active:scale-[0.98]",
+        "transition-all duration-300",
+        "before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-cyber-cyan/20 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-500",
+      ),
+      yellow: cn(
+        // Alias for gold variant
+        "cyber-button",
+        "bg-gradient-to-r from-cyber-dark/90 via-cyber-black/80 to-cyber-dark/90",
+        "text-cyber-yellow font-bold uppercase tracking-wider text-xs",
+        "border border-cyber-yellow/60",
+        "shadow-neon-yellow",
+        "hover:shadow-[0_0_15px_hsl(var(--cyber-yellow)),0_0_25px_hsl(var(--cyber-yellow)),0_0_35px_hsl(var(--cyber-yellow)/0.4)]",
+        "hover:bg-cyber-yellow/10 hover:border-cyber-yellow",
+        "hover:scale-[1.02]",
+        "active:scale-[0.98]",
+        "transition-all duration-300",
+        "before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-cyber-yellow/20 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-500",
       ),
     };
 
@@ -107,10 +134,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {loading && (
           <div className="relative mr-3 h-4 w-4">
-            {/* Outer glow ring */}
+            {/* Outer cyber ring */}
             <div className="absolute inset-0 animate-spin">
               <svg
-                className="h-full w-full drop-shadow-[0_0_4px_rgba(255,184,77,0.6)]"
+                className="h-full w-full drop-shadow-[0_0_6px_rgba(0,255,255,0.8)]"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -123,17 +150,20 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                   cy="12" 
                   r="10" 
                   stroke="currentColor" 
-                  strokeWidth="3" 
+                  strokeWidth="2" 
                 />
                 <path
-                  className="opacity-90 drop-shadow-[0_0_2px_rgba(255,184,77,0.8)]"
+                  className="opacity-90 drop-shadow-[0_0_4px_rgba(0,255,255,1)]"
                   fill="currentColor"
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 />
               </svg>
             </div>
-            {/* Inner chip-style core */}
-            <div className="absolute inset-[6px] rounded-full bg-gradient-to-br from-chip-gold/30 to-chip-copper/20 animate-pulse border border-chip-gold/40" />
+            {/* Inner cyberpunk core with glitch effect */}
+            <div className="absolute inset-[6px] bg-gradient-to-br from-cyber-cyan/40 to-cyber-magenta/20 animate-cyber-pulse border border-cyber-cyan/60" 
+                 style={{clipPath: 'polygon(0% 0%, 85% 0%, 100% 15%, 100% 100%, 15% 100%, 0% 85%)'}} />
+            {/* Center pixel */}
+            <div className="absolute inset-[9px] bg-cyber-cyan animate-pulse opacity-80" />
           </div>
         )}
         {children}

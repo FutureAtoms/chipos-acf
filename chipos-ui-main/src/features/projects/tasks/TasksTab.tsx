@@ -252,8 +252,8 @@ const ViewControls = ({ viewMode, onViewChange, onAddTask }: ViewControlsProps) 
             className={cn(
               "absolute bottom-0 left-0 right-0 h-[2px]",
               "bg-gradient-to-r from-transparent via-cyan-500 to-transparent",
-              "shadow-[0_0_10px_2px_rgba(255,184,77,0.4)]",
-              "dark:shadow-[0_0_20px_5px_rgba(255,184,77,0.7)]",
+              "shadow-[0_0_10px_2px_rgba(0,255,255,0.4)]",
+              "dark:shadow-[0_0_20px_5px_rgba(0,255,255,0.7)]",
             )}
           />
         </Button>
@@ -285,8 +285,8 @@ const ViewControls = ({ viewMode, onViewChange, onAddTask }: ViewControlsProps) 
                 className={cn(
                   "absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[2px]",
                   "bg-cyan-500",
-                  "shadow-[0_0_10px_2px_rgba(255,184,77,0.4)]",
-                  "dark:shadow-[0_0_20px_5px_rgba(255,184,77,0.7)]",
+                  "shadow-[0_0_10px_2px_rgba(0,255,255,0.4)]",
+                  "dark:shadow-[0_0_20px_5px_rgba(0,255,255,0.7)]",
                 )}
               />
             )}

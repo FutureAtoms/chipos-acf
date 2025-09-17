@@ -666,12 +666,11 @@ export const KnowledgeBasePage = () => {
           
           <Button 
             onClick={handleAddKnowledge} 
-            variant="primary" 
-            accentColor="purple" 
-            className="shadow-lg shadow-purple-500/20"
+            variant="yellow" 
+            className="shadow-lg shadow-yellow-500/20"
           >
-            <Plus className="w-4 h-4 mr-2 inline" />
-            <span>Knowledge</span>
+            <Plus className="w-4 h-4 mr-2" />
+            Knowledge
           </Button>
         </motion.div>
       </motion.div>

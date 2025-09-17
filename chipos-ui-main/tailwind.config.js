@@ -1,7 +1,8 @@
-module.exports = {content: [
-  './index.html',
-  './src/**/*.{js,ts,jsx,tsx}'
-],
+module.exports = {
+  content: [
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}'
+  ],
   darkMode: "selector",
   theme: {
     container: {
@@ -46,19 +47,36 @@ module.exports = {content: [
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Chip-specific colors
+        // Cyberpunk color palette
+        cyber: {
+          cyan: "hsl(var(--cyber-cyan))",
+          magenta: "hsl(var(--cyber-magenta))",
+          yellow: "hsl(var(--cyber-yellow))",
+          green: "hsl(var(--cyber-green))",
+          red: "hsl(var(--cyber-red))",
+          purple: "hsl(var(--cyber-purple))",
+          orange: "hsl(var(--cyber-orange))",
+          black: "hsl(var(--cyber-black))",
+          dark: "hsl(var(--cyber-dark))",
+          darker: "hsl(var(--cyber-darker))",
+        },
+        // Legacy chip colors for compatibility
         chip: {
-          gold: "hsl(var(--chip-gold))",
-          copper: "hsl(var(--chip-copper))",
-          silver: "hsl(var(--chip-silver))",
-          dark: "hsl(var(--chip-dark))",
-          trace: "hsl(var(--chip-trace))",
+          gold: "hsl(var(--cyber-yellow))",
+          copper: "hsl(var(--cyber-orange))",
+          silver: "hsl(var(--cyber-cyan))",
+          dark: "hsl(var(--cyber-dark))",
+          trace: "hsl(var(--cyber-cyan))",
         },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      fontFamily: {
+        mono: ['JetBrains Mono', 'Courier New', 'monospace'],
+        cyber: ['Orbitron', 'Exo 2', 'Rajdhani', 'monospace'],
       },
       keyframes: {
         "caret-blink": {
@@ -76,13 +94,86 @@ module.exports = {content: [
         "shimmer": {
           "100%": { transform: "translateX(100%)" },
         },
+        // Cyberpunk animations
+        "glitch": {
+          "0%, 100%": { transform: "translate(0)" },
+          "20%": { transform: "translate(-2px, 2px)" },
+          "40%": { transform: "translate(-2px, -2px)" },
+          "60%": { transform: "translate(2px, 2px)" },
+          "80%": { transform: "translate(2px, -2px)" },
+        },
+        "neon-flicker": {
+          "0%, 19%, 21%, 23%, 25%, 54%, 56%, 100%": { 
+            textShadow: "0 0 5px hsl(var(--cyber-cyan)), 0 0 10px hsl(var(--cyber-cyan)), 0 0 15px hsl(var(--cyber-cyan)), 0 0 20px hsl(var(--cyber-cyan))"
+          },
+          "20%, 24%, 55%": { textShadow: "none" },
+        },
+        "cyber-pulse": {
+          "0%, 100%": { 
+            boxShadow: "0 0 5px hsl(var(--cyber-cyan) / 0.5), 0 0 10px hsl(var(--cyber-cyan) / 0.3), 0 0 20px hsl(var(--cyber-cyan) / 0.1)"
+          },
+          "50%": { 
+            boxShadow: "0 0 10px hsl(var(--cyber-cyan) / 0.7), 0 0 20px hsl(var(--cyber-cyan) / 0.5), 0 0 30px hsl(var(--cyber-cyan) / 0.3)"
+          },
+        },
+        "matrix-rain": {
+          "0%": { transform: "translateY(-100vh)", opacity: "1" },
+          "100%": { transform: "translateY(100vh)", opacity: "0" },
+        },
+        "scan-line": {
+          "0%": { top: "0%" },
+          "100%": { top: "100%" },
+        },
+        "holographic-shift": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        "data-stream": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "caret-blink": "caret-blink 1.25s ease-out infinite",
         "shimmer": "shimmer 2s infinite",
+        // Cyberpunk animations
+        "glitch": "glitch 0.3s ease-in-out infinite",
+        "neon-flicker": "neon-flicker 1.5s infinite linear",
+        "cyber-pulse": "cyber-pulse 2s ease-in-out infinite",
+        "matrix-rain": "matrix-rain 3s linear infinite",
+        "scan-line": "scan-line 2s ease-in-out infinite",
+        "holographic": "holographic-shift 3s ease infinite",
+        "data-stream": "data-stream 2s linear infinite",
+      },
+      textShadow: {
+        'neon-cyan': '0 0 5px hsl(var(--cyber-cyan)), 0 0 10px hsl(var(--cyber-cyan)), 0 0 15px hsl(var(--cyber-cyan))',
+        'neon-magenta': '0 0 5px hsl(var(--cyber-magenta)), 0 0 10px hsl(var(--cyber-magenta)), 0 0 15px hsl(var(--cyber-magenta))',
+        'neon-yellow': '0 0 5px hsl(var(--cyber-yellow)), 0 0 10px hsl(var(--cyber-yellow)), 0 0 15px hsl(var(--cyber-yellow))',
+      },
+      boxShadow: {
+        'neon-cyan': '0 0 5px hsl(var(--cyber-cyan)), 0 0 10px hsl(var(--cyber-cyan)), 0 0 20px hsl(var(--cyber-cyan) / 0.3)',
+        'neon-magenta': '0 0 5px hsl(var(--cyber-magenta)), 0 0 10px hsl(var(--cyber-magenta)), 0 0 20px hsl(var(--cyber-magenta) / 0.3)',
+        'neon-yellow': '0 0 5px hsl(var(--cyber-yellow)), 0 0 10px hsl(var(--cyber-yellow)), 0 0 20px hsl(var(--cyber-yellow) / 0.3)',
+        'cyber-inset': 'inset 0 0 10px hsl(var(--cyber-cyan) / 0.2), inset 0 0 20px hsl(var(--cyber-magenta) / 0.1)',
       },
     },
   },
+  plugins: [
+    function({ addUtilities }) {
+      const newUtilities = {
+        '.text-shadow-neon-cyan': {
+          textShadow: '0 0 2px hsl(var(--cyber-cyan) / 0.4), 0 0 4px hsl(var(--cyber-cyan) / 0.2)',
+        },
+        '.text-shadow-neon-magenta': {
+          textShadow: '0 0 2px hsl(var(--cyber-magenta) / 0.4), 0 0 4px hsl(var(--cyber-magenta) / 0.2)',
+        },
+        '.text-shadow-neon-yellow': {
+          textShadow: '0 0 2px hsl(var(--cyber-yellow) / 0.4), 0 0 4px hsl(var(--cyber-yellow) / 0.2)',
+        },
+      }
+      addUtilities(newUtilities)
+    }
+  ],
 }

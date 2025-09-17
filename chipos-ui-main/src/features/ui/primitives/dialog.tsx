@@ -47,7 +47,7 @@ export const DialogContent = React.forwardRef<
       className={cn(
         "fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2",
         "p-8 rounded-xl backdrop-blur-lg",
-        "w-full max-w-2xl max-h-[90vh] overflow-y-auto",
+        "w-full max-w-2xl",
         // Sophisticated matte embossed glassmorphism
         compoundStyles.floatingPanel,
         glassmorphism.glow.moderate,

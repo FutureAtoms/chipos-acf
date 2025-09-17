@@ -142,40 +142,40 @@ export function MainLayout({ children, className }: MainLayoutProps) {
         <BackendStatus isHealthLoading={isHealthLoading} isBackendError={isBackendError} healthData={healthData} />
       </div>
 
-      {/* Main Content Area - matches old layout exactly */}
-      <div className="relative flex-1 pl-[100px] z-10">
-        <div className="container mx-auto px-8 relative">
-          <div className="min-h-screen pt-8 pb-16">{children}</div>
+      {/* Main Content Area - increased padding to prevent overlap */}
+      <div className="relative flex-1 pl-[160px] z-10 overflow-visible">
+        <div className="container mx-auto px-8 relative z-0 overflow-visible">
+          <div className="min-h-screen pt-8 pb-24 relative z-10 overflow-visible">{children}</div>
         </div>
       </div>
 
-      {/* TEMPORARY: Floating Chat Button (disabled) - from old layout */}
+      {/* TEMPORARY: Floating Chat Button (disabled) - cyberpunk style */}
       <div className="fixed bottom-6 right-6 z-50 group">
         <button
           type="button"
           disabled
-          className="w-14 h-14 rounded-full flex items-center justify-center backdrop-blur-md bg-gradient-to-b from-gray-100/80 to-gray-50/60 dark:from-gray-700/30 dark:to-gray-800/30 shadow-[0_0_10px_rgba(156,163,175,0.3)] dark:shadow-[0_0_10px_rgba(156,163,175,0.3)] cursor-not-allowed opacity-60 overflow-hidden border border-gray-300 dark:border-gray-600"
+          className="w-14 h-14 flex items-center justify-center bg-cyber-black/50 backdrop-blur-sm border border-cyber-cyan/20 cursor-not-allowed opacity-40 overflow-hidden"
           aria-label="Knowledge Assistant - Coming Soon"
         >
           <div className="relative w-12 h-12">
-            {/* Subtle ambient glow for disabled state */}
-            <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-gray-300/15 via-transparent to-gray-400/8 blur-sm opacity-40" />
+            {/* Minimal glow for disabled state */}
+            <div className="absolute inset-0 bg-cyber-cyan/5 blur-sm" />
             
-            {/* Embossed container */}
-            <div className="relative w-12 h-12 rounded-lg bg-gradient-to-br from-gray-100/70 via-gray-50/50 to-gray-200/40 dark:from-gray-800/70 dark:via-gray-900/60 dark:to-black/70 shadow-[inset_0_1px_0_rgba(255,255,255,0.3)] dark:shadow-[inset_0_1px_0_rgba(192,192,192,0.15)] shadow-[0_3px_6px_rgba(0,0,0,0.15)] border border-gray-200/50 dark:border-gray-600/30">
+            {/* Simple container */}
+            <div className="relative w-12 h-12 bg-cyber-black/30 flex items-center justify-center border border-cyber-cyan/10">
               <img 
                 src="/logo-neon.png" 
                 alt="ChipOS" 
-                className="w-12 h-12 grayscale opacity-60 filter saturate-75 contrast-95 drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)] relative z-10" 
+                className="w-10 h-10 grayscale opacity-30" 
               />
             </div>
           </div>
         </button>
-        {/* Tooltip */}
-        <div className="absolute bottom-full right-0 mb-2 px-3 py-2 bg-gray-800 dark:bg-gray-900 text-white text-sm rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-          <div className="font-medium">Coming Soon</div>
-          <div className="text-xs text-gray-300">Knowledge Assistant is under development</div>
-          <div className="absolute bottom-0 right-6 transform translate-y-1/2 rotate-45 w-2 h-2 bg-gray-800 dark:bg-gray-900"></div>
+        {/* Cyberpunk Tooltip */}
+        <div className="absolute bottom-full right-0 mb-2 px-3 py-2 bg-cyber-black/80 border border-cyber-cyan/20 text-cyber-cyan/60 text-sm font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+          <div className="font-medium uppercase">Coming Soon</div>
+          <div className="text-xs opacity-60">Knowledge Assistant Protocol</div>
+          <div className="absolute bottom-0 right-6 transform translate-y-1/2 rotate-45 w-2 h-2 bg-cyber-black/80 border-r border-b border-cyber-cyan/20"></div>
         </div>
       </div>
     </div>

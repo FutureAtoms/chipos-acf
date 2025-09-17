@@ -94,7 +94,7 @@ export const NewProjectModal: React.FC<NewProjectModalProps> = ({ open, onOpenCh
               <textarea
                 id={projectDescriptionId}
                 placeholder="Enter project description..."
-                rows={4}
+                rows={3}
                 value={formData.description}
                 onChange={(e) =>
                   setFormData((prev) => ({

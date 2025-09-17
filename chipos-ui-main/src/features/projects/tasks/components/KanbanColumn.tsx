@@ -51,30 +51,32 @@ export const KanbanColumn = ({
       ref={ref}
       className={cn(
         "flex flex-col h-full",
-        "bg-gradient-to-b from-white/20 to-transparent dark:from-black/30 dark:to-transparent",
+        "bg-gradient-to-b from-cyber-black/40 to-cyber-black/20",
         "backdrop-blur-sm",
+        "border-r border-cyber-cyan/10",
+        "last:border-r-0",
+        "relative",
         "transition-all duration-200",
-        isOver && "bg-gradient-to-b from-cyan-500/5 to-purple-500/5 dark:from-cyan-400/10 dark:to-purple-400/10",
-        isOver && "border-t-2 border-t-cyan-400/50 dark:border-t-cyan-400/70",
-        isOver &&
-          "shadow-[inset_0_2px_20px_rgba(255,184,77,0.15)] dark:shadow-[inset_0_2px_30px_rgba(255,184,77,0.25)]",
+        isOver && "bg-gradient-to-b from-cyber-cyan/10 to-cyber-magenta/5",
+        isOver && "border-t-2 border-t-cyber-cyan/50",
+        isOver && "shadow-[inset_0_2px_20px_rgba(0,255,255,0.1)]",
         isOver && "backdrop-blur-md",
       )}
     >
-      {/* Column Header with Glassmorphism */}
+      {/* Column Header with Cyberpunk style */}
       <div
         className={cn(
           "text-center py-3 sticky top-0 z-10",
-          "bg-gradient-to-b from-white/80 to-white/60 dark:from-black/80 dark:to-black/60",
+          "bg-gradient-to-b from-cyber-black/90 to-cyber-black/70",
           "backdrop-blur-md",
-          "border-b border-gray-200/50 dark:border-gray-700/50",
+          "border-b border-cyber-cyan/20",
           "relative",
         )}
       >
-        <h3 className={cn("font-mono text-sm font-medium", getColumnColor(status))}>{title}</h3>
+        <h3 className={cn("font-mono text-sm font-bold uppercase tracking-wider", getColumnColor(status))}>{title}</h3>
         {/* Column header glow effect */}
         <div
-          className={cn("absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[1px]", getColumnGlow(status))}
+          className={cn("absolute bottom-0 left-0 right-0 h-[1px]", getColumnGlow(status))}
         />
       </div>
 

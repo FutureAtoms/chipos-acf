@@ -47,13 +47,13 @@ export const McpClientList: React.FC<McpClientListProps> = ({
 
   if (clients.length === 0) {
     return (
-      <div className={cn(compoundStyles.card, "p-6 text-center rounded-lg relative overflow-hidden", className)}>
-        <div className="absolute top-3 right-3 px-2 py-1 bg-cyan-500/20 text-cyan-400 text-xs font-semibold rounded-full border border-cyan-500/30">
+      <div className={cn("bg-cyber-black/60 backdrop-blur-sm border border-cyber-cyan/20 p-6 text-center rounded-sm relative overflow-hidden", className)}>
+        <div className="absolute top-3 right-3 px-2 py-1 bg-cyber-cyan/10 text-cyber-cyan/60 text-xs font-mono uppercase border border-cyber-cyan/20">
           Coming Soon
         </div>
-        <Monitor className="w-12 h-12 mx-auto mb-3 text-zinc-500" />
-        <p className="text-zinc-400">Client detection coming soon</p>
-        <p className="text-sm text-zinc-500 mt-2">
+        <Monitor className="w-12 h-12 mx-auto mb-3 text-cyber-cyan/30" />
+        <p className="text-cyber-cyan/50 font-mono">Client detection coming soon</p>
+        <p className="text-sm text-cyber-cyan/30 mt-2 font-mono">
           We'll automatically detect when AI assistants connect to the MCP server
         </p>
       </div>

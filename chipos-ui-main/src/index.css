@@ -1,295 +1,455 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
   :root {
-    /* Light mode variables - Chip aesthetic */
-    --background: 0 0% 95%;
-    --foreground: 0 0% 10%;
-    --muted: 0 0% 85%;
-    --muted-foreground: 0 0% 35%;
-    --popover: 0 0% 98%;
-    --popover-foreground: 0 0% 10%;
-    --border: 0 0% 75%;
-    --input: 0 0% 75%;
-    --card: 0 0% 92%;
-    --card-foreground: 0 0% 10%;
-    --primary: 38 92% 60%; /* Golden/Amber */
-    --primary-foreground: 0 0% 10%;
-    --secondary: 0 0% 85%;
-    --secondary-foreground: 0 0% 10%;
-    --accent: 38 92% 60%; /* Golden/Amber */
-    --accent-foreground: 0 0% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --ring: 0 0% 50%;
-    --radius: 0.25rem; /* More squared like chip */
-    /* Chip-specific colors */
-    --chip-gold: 38 92% 60%; /* #FFB84D */
-    --chip-copper: 25 55% 47%; /* #B87333 */
-    --chip-silver: 0 0% 75%; /* #C0C0C0 */
-    --chip-dark: 0 0% 10%; /* #1a1a1a */
-    --chip-trace: 38 85% 50%; /* Circuit trace color */
+    /* Cyberpunk Color Palette - Light mode (rarely used) */
+    --background: 210 40% 5%; /* Deep black-blue */
+    --foreground: 180 100% 50%; /* Bright cyan */
+    --muted: 210 40% 12%;
+    --muted-foreground: 300 100% 60%; /* Magenta */
+    --popover: 210 40% 8%;
+    --popover-foreground: 180 100% 50%;
+    --border: 300 100% 40%; /* Dark magenta border */
+    --input: 210 40% 10%;
+    --card: 210 40% 7%;
+    --card-foreground: 180 100% 50%;
+    --primary: 180 100% 50%; /* Bright cyan primary */
+    --primary-foreground: 210 40% 5%;
+    --secondary: 300 100% 60%; /* Magenta secondary */
+    --secondary-foreground: 210 40% 5%;
+    --accent: 60 100% 50%; /* Electric yellow accent */
+    --accent-foreground: 210 40% 5%;
+    --destructive: 0 100% 60%; /* Neon red */
+    --destructive-foreground: 210 40% 5%;
+    --ring: 180 100% 50%;
+    --radius: 0.125rem; /* Sharp edges for cyberpunk */
+    
+    /* Cyberpunk-specific colors */
+    --cyber-cyan: 180 100% 50%; /* #00FFFF */
+    --cyber-magenta: 300 100% 60%; /* #FF33FF */
+    --cyber-yellow: 45 100% 35%; /* #B8B800 - Darker yellow */
+    --cyber-green: 120 100% 50%; /* #00FF00 */
+    --cyber-red: 0 100% 60%; /* #FF3333 */
+    --cyber-purple: 270 100% 50%; /* #8000FF */
+    --cyber-orange: 30 100% 50%; /* #FF8000 */
+    --cyber-black: 210 40% 5%; /* #0D0D1A */
+    --cyber-dark: 210 40% 8%; /* #111122 */
+    --cyber-darker: 210 40% 3%; /* #080810 */
   }
+  
   .dark {
-    /* Dark mode variables - Chip aesthetic */
-    --background: 0 0% 8%; /* Very dark like chip body */
-    --foreground: 38 92% 60%; /* Golden text */
-    --muted: 0 0% 15%;
-    --muted-foreground: 38 50% 65%;
-    --popover: 0 0% 10%;
-    --popover-foreground: 38 92% 60%;
-    --border: 0 0% 25%;
-    --input: 0 0% 20%;
-    --card: 0 0% 12%;
-    --card-foreground: 38 92% 60%;
-    --primary: 38 92% 60%; /* Golden/Amber */
-    --primary-foreground: 0 0% 10%;
-    --secondary: 0 0% 20%;
-    --secondary-foreground: 38 92% 60%;
-    --accent: 38 92% 60%; /* Golden/Amber */
-    --accent-foreground: 0 0% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --ring: 38 50% 40%;
-    --radius: 0.25rem; /* More squared like chip */
-    /* Chip-specific colors */
-    --chip-gold: 38 92% 60%; /* #FFB84D */
-    --chip-copper: 25 55% 47%; /* #B87333 */
-    --chip-silver: 0 0% 60%; /* Darker silver for dark mode */
-    --chip-dark: 0 0% 8%; /* #141414 */
-    --chip-trace: 38 85% 50%; /* Circuit trace color */
+    /* Dark mode - primary theme for cyberpunk */
+    --background: 210 40% 3%; /* Ultra dark background */
+    --foreground: 180 100% 70%; /* Slightly dimmed cyan for readability */
+    --muted: 210 40% 8%;
+    --muted-foreground: 300 80% 70%;
+    --popover: 210 40% 5%;
+    --popover-foreground: 180 100% 70%;
+    --border: 300 60% 30%; /* Subtle magenta borders */
+    --input: 210 40% 8%;
+    --card: 210 40% 4%;
+    --card-foreground: 180 100% 70%;
+    --primary: 180 100% 50%; /* Bright cyan */
+    --primary-foreground: 210 40% 3%;
+    --secondary: 300 100% 60%; /* Magenta */
+    --secondary-foreground: 210 40% 3%;
+    --accent: 45 100% 35%; /* Darker yellow */
+    --accent-foreground: 210 40% 3%;
+    --destructive: 0 100% 60%;
+    --destructive-foreground: 210 40% 3%;
+    --ring: 180 100% 50%;
+    --radius: 0.125rem;
   }
 }
+
 @layer base {
   * {
     @apply border-border;
   }
+  
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-mono;
     font-feature-settings: "rlig" 1, "calt" 1;
+    background-image: 
+      radial-gradient(circle at 20% 50%, hsl(var(--cyber-cyan) / 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsl(var(--cyber-magenta) / 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, hsl(var(--cyber-purple) / 0.02) 0%, transparent 50%);
+    background-attachment: fixed;
   }
 }
+
 @layer components {
-  /* Circuit board pattern for background */
-  .circuit-grid {
+  /* Cyberpunk Grid Pattern */
+  .cyber-grid {
     background-image:
-      linear-gradient(to right, hsl(var(--chip-silver) / 0.15) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--chip-silver) / 0.15) 1px, transparent 1px);
-    background-size: 30px 30px;
+      linear-gradient(to right, hsl(var(--cyber-cyan) / 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--cyber-cyan) / 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
     position: relative;
   }
   
-  .dark .circuit-grid {
-    background-image:
-      linear-gradient(to right, hsl(var(--chip-silver) / 0.10) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--chip-silver) / 0.10) 1px, transparent 1px);
-  }
-  
-  /* Circuit trace decorative pattern */
-  .circuit-trace::before {
+  .cyber-grid::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 2px;
+    bottom: 0;
+    background-image:
+      linear-gradient(to right, hsl(var(--cyber-magenta) / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--cyber-magenta) / 0.05) 1px, transparent 1px);
+    background-size: 80px 80px;
+    background-position: 20px 20px;
+  }
+  
+  /* Neon glow effects */
+  .neon-glow {
+    box-shadow: 
+      0 0 5px hsl(var(--cyber-cyan) / 0.5),
+      0 0 10px hsl(var(--cyber-cyan) / 0.3),
+      0 0 20px hsl(var(--cyber-cyan) / 0.1);
+  }
+  
+  .neon-glow-magenta {
+    box-shadow: 
+      0 0 5px hsl(var(--cyber-magenta) / 0.5),
+      0 0 10px hsl(var(--cyber-magenta) / 0.3),
+      0 0 20px hsl(var(--cyber-magenta) / 0.1);
+  }
+  
+  .neon-glow-yellow {
+    box-shadow: 
+      0 0 5px hsl(var(--cyber-yellow) / 0.5),
+      0 0 10px hsl(var(--cyber-yellow) / 0.3),
+      0 0 20px hsl(var(--cyber-yellow) / 0.1);
+  }
+  
+  /* Cyber panels */
+  .cyber-panel {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--cyber-black) / 0.8) 0%,
+      hsl(var(--cyber-dark) / 0.6) 50%,
+      hsl(var(--cyber-black) / 0.9) 100%
+    );
+    border: 1px solid hsl(var(--cyber-cyan) / 0.3);
+    backdrop-filter: blur(10px);
+    position: relative;
+  }
+  
+  .cyber-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
     background: linear-gradient(
       90deg,
       transparent 0%,
-      hsl(var(--chip-copper)) 10%,
-      hsl(var(--chip-gold)) 50%,
-      hsl(var(--chip-copper)) 90%,
+      hsl(var(--cyber-cyan)) 50%,
       transparent 100%
     );
   }
   
-  /* Chip surface gradient */
-  .chip-surface {
+  /* Cyber buttons */
+  .cyber-button {
     background: linear-gradient(
-      135deg,
-      hsl(var(--chip-dark)) 0%,
-      hsl(var(--chip-dark) / 0.95) 50%,
-      hsl(var(--chip-dark) / 0.90) 100%
+      45deg,
+      hsl(var(--cyber-dark)) 0%,
+      hsl(var(--cyber-black)) 100%
     );
+    border: 1px solid hsl(var(--cyber-cyan) / 0.5);
+    color: hsl(var(--cyber-cyan));
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .cyber-button:hover {
+    border-color: hsl(var(--cyber-cyan));
+    color: hsl(var(--cyber-black));
+    background: hsl(var(--cyber-cyan) / 0.1);
+    box-shadow: 
+      0 0 20px hsl(var(--cyber-cyan) / 0.4),
+      inset 0 0 20px hsl(var(--cyber-cyan) / 0.1);
+  }
+  
+  .cyber-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--cyber-cyan) / 0.2) 50%,
+      transparent 100%
+    );
+    transition: left 0.5s ease;
+  }
+  
+  .cyber-button:hover::before {
+    left: 100%;
   }
 }
 
-/* Animation delays (checked for usage) */
-.animation-delay-150 {
-  animation-delay: 150ms;
-}
-.animation-delay-300 {
-  animation-delay: 300ms;
+/* Cyberpunk Animations */
+@keyframes glitch {
+  0%, 100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
 }
 
-/* Circuit pulse animation - data flowing through circuits */
-@keyframes circuit-pulse {
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow:
+      0 0 2px hsl(var(--cyber-cyan) / 0.5),
+      0 0 4px hsl(var(--cyber-cyan) / 0.3),
+      0 0 15px hsl(var(--cyber-cyan)),
+      0 0 20px hsl(var(--cyber-cyan));
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+@keyframes cyber-pulse {
   0%, 100% {
-    box-shadow:
-      inset 0 0 10px 2px hsl(var(--chip-gold) / 0.20),
-      0 2px 8px hsl(var(--chip-dark) / 0.80);
-    border-color: hsl(var(--chip-silver) / 0.40);
+    box-shadow: 
+      0 0 5px hsl(var(--cyber-cyan) / 0.5),
+      0 0 10px hsl(var(--cyber-cyan) / 0.3),
+      0 0 20px hsl(var(--cyber-cyan) / 0.1),
+      inset 0 0 10px hsl(var(--cyber-cyan) / 0.05);
   }
   50% {
-    box-shadow:
-      inset 0 0 15px 3px hsl(var(--chip-gold) / 0.40),
-      0 2px 12px hsl(var(--chip-dark) / 0.90);
-    border-color: hsl(var(--chip-gold) / 0.60);
+    box-shadow: 
+      0 0 10px hsl(var(--cyber-cyan) / 0.7),
+      0 0 20px hsl(var(--cyber-cyan) / 0.5),
+      0 0 30px hsl(var(--cyber-cyan) / 0.3),
+      inset 0 0 20px hsl(var(--cyber-cyan) / 0.1);
   }
 }
 
-.animate-circuit-pulse {
-  animation: circuit-pulse 2s ease-in-out infinite;
-}
-
-/* Data flow animation for circuit traces */
-@keyframes data-flow {
+@keyframes matrix-rain {
   0% {
-    background-position: 0% 50%;
+    transform: translateY(-100vh);
+    opacity: 1;
   }
   100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes scan-line {
+  0% {
+    top: 0%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+.animate-glitch {
+  animation: glitch 0.3s ease-in-out infinite;
+}
+
+.animate-neon-flicker {
+  animation: neon-flicker 1.5s infinite linear;
+}
+
+.animate-cyber-pulse {
+  animation: cyber-pulse 2s ease-in-out infinite;
+}
+
+.animate-matrix-rain {
+  animation: matrix-rain 3s linear infinite;
+}
+
+/* Matrix digital rain effect */
+.matrix-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.matrix-rain::before {
+  content: '01010101010101010101010101010101010101010101';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 200%;
+  color: hsl(var(--cyber-green) / 0.1);
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 2px;
+  animation: matrix-rain 10s linear infinite;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* Scan line effect */
+.scan-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsl(var(--cyber-cyan) / 0.8) 50%,
+    transparent 100%
+  );
+  animation: scan-line 2s ease-in-out infinite;
+}
+
+/* Custom scrollbar - Cyberpunk style */
+.cyber-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--cyber-cyan) / 0.5) hsl(var(--cyber-black));
+}
+
+.cyber-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.cyber-scrollbar::-webkit-scrollbar-track {
+  background: hsl(var(--cyber-black));
+  border: 1px solid hsl(var(--cyber-cyan) / 0.2);
+}
+
+.cyber-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    to bottom,
+    hsl(var(--cyber-cyan) / 0.8),
+    hsl(var(--cyber-magenta) / 0.4)
+  );
+  border-radius: 2px;
+  border: 1px solid hsl(var(--cyber-cyan) / 0.5);
+}
+
+.cyber-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    to bottom,
+    hsl(var(--cyber-cyan)),
+    hsl(var(--cyber-magenta) / 0.8)
+  );
+  box-shadow: 0 0 10px hsl(var(--cyber-cyan) / 0.5);
+}
+
+/* Glitch text effect */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.glitch-text::before {
+  animation: glitch-1 0.5s infinite;
+  color: hsl(var(--cyber-magenta));
+  z-index: -1;
+}
+
+.glitch-text::after {
+  animation: glitch-2 0.5s infinite;
+  color: hsl(var(--cyber-cyan));
+  z-index: -2;
+}
+
+@keyframes glitch-1 {
+  0%, 14%, 15%, 49%, 50%, 99%, 100% {
+    transform: translate(0, 0);
+  }
+  15%, 49% {
+    transform: translate(-2px, -2px);
+  }
+}
+
+@keyframes glitch-2 {
+  0%, 20%, 21%, 62%, 63%, 99%, 100% {
+    transform: translate(0, 0);
+  }
+  21%, 62% {
+    transform: translate(2px, 2px);
+  }
+}
+
+/* Holographic effect */
+.holographic {
+  background: linear-gradient(
+    45deg,
+    hsl(var(--cyber-cyan) / 0.1) 0%,
+    hsl(var(--cyber-magenta) / 0.1) 25%,
+    hsl(var(--cyber-yellow) / 0.1) 50%,
+    hsl(var(--cyber-green) / 0.1) 75%,
+    hsl(var(--cyber-cyan) / 0.1) 100%
+  );
+  background-size: 200% 200%;
+  animation: holographic-shift 3s ease infinite;
+}
+
+@keyframes holographic-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
     background-position: 100% 50%;
   }
 }
 
-.animate-data-flow {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    hsl(var(--chip-gold) / 0.6) 50%,
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  animation: data-flow 3s linear infinite;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .animate-circuit-pulse,
-  .animate-data-flow {
+  .animate-glitch,
+  .animate-neon-flicker,
+  .animate-cyber-pulse,
+  .animate-matrix-rain,
+  .scan-line::after,
+  .glitch-text::before,
+  .glitch-text::after,
+  .holographic {
     animation: none !important;
   }
-}
-
-/* Custom scrollbar styles - Chip aesthetic */
-.custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: hsl(var(--chip-silver) / 0.30) transparent;
-}
-
-.custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: hsl(var(--chip-dark) / 0.20);
-  border: 1px solid hsl(var(--chip-silver) / 0.10);
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    to bottom,
-    hsl(var(--chip-silver) / 0.40),
-    hsl(var(--chip-silver) / 0.20)
-  );
-  border-radius: 2px;
-  border: 1px solid hsl(var(--chip-gold) / 0.20);
-  transition: all 0.2s ease;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    to bottom,
-    hsl(var(--chip-gold) / 0.50),
-    hsl(var(--chip-gold) / 0.30)
-  );
-  border-color: hsl(var(--chip-gold) / 0.40);
-}
-
-.dark .custom-scrollbar {
-  scrollbar-color: hsl(var(--chip-gold) / 0.30) transparent;
-}
-
-.dark .custom-scrollbar::-webkit-scrollbar-track {
-  background: hsl(var(--chip-dark) / 0.50);
-  border-color: hsl(var(--chip-silver) / 0.05);
-}
-
-.dark .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    to bottom,
-    hsl(var(--chip-gold) / 0.40),
-    hsl(var(--chip-gold) / 0.20)
-  );
-  border-color: hsl(var(--chip-gold) / 0.30);
-}
-
-.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    to bottom,
-    hsl(var(--chip-gold) / 0.60),
-    hsl(var(--chip-gold) / 0.40)
-  );
-  border-color: hsl(var(--chip-gold) / 0.50);
-}
-
-/* Thin scrollbar styles - Chip aesthetic */
-.scrollbar-thin {
-  scrollbar-width: thin;
-  scrollbar-color: hsl(var(--chip-silver) / 0.25) transparent;
-}
-
-.scrollbar-thin::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-.scrollbar-thin::-webkit-scrollbar-track {
-  background: hsl(var(--chip-dark) / 0.10);
-}
-
-.scrollbar-thin::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    to bottom,
-    hsl(var(--chip-silver) / 0.50),
-    hsl(var(--chip-silver) / 0.30)
-  );
-  border-radius: 1px;
-  box-shadow: inset 0 0 2px hsl(var(--chip-gold) / 0.20);
-  transition: all 0.2s ease;
-}
-
-.scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    to bottom,
-    hsl(var(--chip-gold) / 0.60),
-    hsl(var(--chip-gold) / 0.40)
-  );
-  box-shadow: inset 0 0 3px hsl(var(--chip-gold) / 0.40);
-}
-
-.dark .scrollbar-thin {
-  scrollbar-color: hsl(var(--chip-gold) / 0.25) hsl(var(--chip-dark) / 0.30);
-}
-
-.dark .scrollbar-thin::-webkit-scrollbar-track {
-  background: hsl(var(--chip-dark) / 0.30);
-}
-
-.dark .scrollbar-thin::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    to bottom,
-    hsl(var(--chip-gold) / 0.35),
-    hsl(var(--chip-gold) / 0.15)
-  );
-  box-shadow: inset 0 0 2px hsl(var(--chip-gold) / 0.30);
-}
-
-.dark .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    to bottom,
-    hsl(var(--chip-gold) / 0.55),
-    hsl(var(--chip-gold) / 0.35)
-  );
-  box-shadow: inset 0 0 4px hsl(var(--chip-gold) / 0.50);
 }

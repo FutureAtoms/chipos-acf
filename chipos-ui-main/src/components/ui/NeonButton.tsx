@@ -10,7 +10,7 @@ export interface CornerRadius {
 }
 
 export type GlowIntensity = 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
-export type ColorOption = 'none' | 'purple' | 'pink' | 'blue' | 'green' | 'red';
+export type ColorOption = 'none' | 'cyan' | 'magenta' | 'yellow' | 'green' | 'red' | 'purple';
 
 export interface NeonButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
   children: React.ReactNode;
@@ -100,62 +100,71 @@ export const NeonButton = React.forwardRef<HTMLButtonElement, NeonButtonProps>((
     borderBottomLeftRadius: `${radius.bottomLeft || 0}px`,
   });
 
-  // Color mappings for gradients and borders
+  // Cyberpunk color mappings for gradients and borders
   const getColorConfig = (color: ColorOption) => {
     const configs = {
       none: {
-        border: 'border-white/20',
-        glow: 'rgba(255,255,255,0.4)',
-        glowDark: 'rgba(255,255,255,0.3)',
-        aurora: 'rgba(255,255,255,0.4)',
-        auroraDark: 'rgba(255,255,255,0.2)',
-        text: 'rgb(156 163 175)', // gray-400
-        textRgb: '156, 163, 175'
+        border: 'border-cyber-cyan/20',
+        glow: 'rgba(0,255,255,0.4)',
+        glowDark: 'rgba(0,255,255,0.3)',
+        aurora: 'rgba(0,255,255,0.4)',
+        auroraDark: 'rgba(0,255,255,0.2)',
+        text: 'rgb(0 255 255)', // cyber-cyan
+        textRgb: '0, 255, 255'
       },
-      purple: {
-        border: 'border-purple-400/30',
-        glow: 'rgba(168,85,247,0.6)',
-        glowDark: 'rgba(168,85,247,0.5)',
-        aurora: 'rgba(168,85,247,0.8)',
-        auroraDark: 'rgba(147,51,234,0.6)',
-        text: 'rgb(168 85 247)', // purple-500
-        textRgb: '168, 85, 247'
+      cyan: {
+        border: 'border-cyber-cyan/40',
+        glow: 'rgba(0,255,255,0.6)',
+        glowDark: 'rgba(0,255,255,0.5)',
+        aurora: 'rgba(0,255,255,0.8)',
+        auroraDark: 'rgba(0,200,200,0.6)',
+        text: 'rgb(0 255 255)', // cyber-cyan
+        textRgb: '0, 255, 255'
       },
-      pink: {
-        border: 'border-pink-400/30',
-        glow: 'rgba(236,72,153,0.6)',
-        glowDark: 'rgba(236,72,153,0.5)',
-        aurora: 'rgba(236,72,153,0.8)',
-        auroraDark: 'rgba(219,39,119,0.6)',
-        text: 'rgb(236 72 153)', // pink-500
-        textRgb: '236, 72, 153'
+      magenta: {
+        border: 'border-cyber-magenta/40',
+        glow: 'rgba(255,51,255,0.6)',
+        glowDark: 'rgba(255,51,255,0.5)',
+        aurora: 'rgba(255,51,255,0.8)',
+        auroraDark: 'rgba(200,51,200,0.6)',
+        text: 'rgb(255 51 255)', // cyber-magenta
+        textRgb: '255, 51, 255'
       },
-      blue: {
-        border: 'border-blue-400/30',
-        glow: 'rgba(255,184,77,0.6)',
-        glowDark: 'rgba(255,184,77,0.5)',
-        aurora: 'rgba(255,184,77,0.8)',
-        auroraDark: 'rgba(37,99,235,0.6)',
-        text: 'rgb(59 130 246)', // blue-500
-        textRgb: '59, 130, 246'
+      yellow: {
+        border: 'border-cyber-yellow/40',
+        glow: 'rgba(255,255,0,0.6)',
+        glowDark: 'rgba(255,255,0,0.5)',
+        aurora: 'rgba(255,255,0,0.8)',
+        auroraDark: 'rgba(200,200,0,0.6)',
+        text: 'rgb(255 255 0)', // cyber-yellow
+        textRgb: '255, 255, 0'
       },
       green: {
-        border: 'border-green-400/30',
-        glow: 'rgba(34,197,94,0.6)',
-        glowDark: 'rgba(34,197,94,0.5)',
-        aurora: 'rgba(34,197,94,0.8)',
-        auroraDark: 'rgba(22,163,74,0.6)',
-        text: 'rgb(34 197 94)', // green-500
-        textRgb: '34, 197, 94'
+        border: 'border-cyber-green/40',
+        glow: 'rgba(0,255,0,0.6)',
+        glowDark: 'rgba(0,255,0,0.5)',
+        aurora: 'rgba(0,255,0,0.8)',
+        auroraDark: 'rgba(0,200,0,0.6)',
+        text: 'rgb(0 255 0)', // cyber-green
+        textRgb: '0, 255, 0'
       },
       red: {
-        border: 'border-red-400/30',
-        glow: 'rgba(239,68,68,0.6)',
-        glowDark: 'rgba(239,68,68,0.5)',
-        aurora: 'rgba(239,68,68,0.8)',
-        auroraDark: 'rgba(220,38,38,0.6)',
-        text: 'rgb(239 68 68)', // red-500
-        textRgb: '239, 68, 68'
+        border: 'border-cyber-red/40',
+        glow: 'rgba(255,51,51,0.6)',
+        glowDark: 'rgba(255,51,51,0.5)',
+        aurora: 'rgba(255,51,51,0.8)',
+        auroraDark: 'rgba(200,51,51,0.6)',
+        text: 'rgb(255 51 51)', // cyber-red
+        textRgb: '255, 51, 51'
+      },
+      purple: {
+        border: 'border-cyber-purple/40',
+        glow: 'rgba(128,0,255,0.6)',
+        glowDark: 'rgba(128,0,255,0.5)',
+        aurora: 'rgba(128,0,255,0.8)',
+        auroraDark: 'rgba(100,0,200,0.6)',
+        text: 'rgb(128 0 255)', // cyber-purple
+        textRgb: '128, 0, 255'
       }
     };
     return configs[color];
@@ -217,16 +226,15 @@ export const NeonButton = React.forwardRef<HTMLButtonElement, NeonButtonProps>((
           />
         )}
         
-        {/* Glass surface */}
+        {/* Cyberpunk surface */}
         <div
           className={cn(
             'absolute inset-0',
-            layer1Color === 'none' 
-              ? 'bg-white/90 dark:bg-black/90' 
-              : 'bg-white/90 dark:bg-black/90',
-            'backdrop-blur-md',
+            'bg-gradient-to-br from-cyber-dark/90 via-cyber-black/80 to-cyber-dark/95',
+            'backdrop-blur-sm',
             layer1Border && `border ${layer1Config.border}`,
-            'transition-all duration-300'
+            'transition-all duration-300',
+            'cyber-button'
           )}
           style={getRadiusStyle(layer1Radius)}
         >
@@ -265,16 +273,18 @@ export const NeonButton = React.forwardRef<HTMLButtonElement, NeonButtonProps>((
             className={cn(
               'relative w-full h-full backdrop-blur-sm',
               layer2Color === 'none' 
-                ? 'bg-gradient-to-b from-white/20 to-white/10 dark:from-white/20 dark:to-black/20' 
-                : layer2Color === 'purple'
-                  ? 'bg-gradient-to-b from-purple-500/30 to-purple-600/30'
-                  : layer2Color === 'pink'
-                    ? 'bg-gradient-to-b from-pink-500/30 to-pink-600/30'
-                    : layer2Color === 'blue'
-                      ? 'bg-gradient-to-b from-blue-500/30 to-blue-600/30'
+                ? 'bg-gradient-to-b from-cyber-cyan/10 to-cyber-cyan/5' 
+                : layer2Color === 'cyan'
+                  ? 'bg-gradient-to-b from-cyber-cyan/20 to-cyber-cyan/10'
+                  : layer2Color === 'magenta'
+                    ? 'bg-gradient-to-b from-cyber-magenta/20 to-cyber-magenta/10'
+                    : layer2Color === 'yellow'
+                      ? 'bg-gradient-to-b from-cyber-yellow/20 to-cyber-yellow/10'
                       : layer2Color === 'green'
-                        ? 'bg-gradient-to-b from-green-500/30 to-green-600/30'
-                        : 'bg-gradient-to-b from-red-500/30 to-red-600/30',
+                        ? 'bg-gradient-to-b from-cyber-green/20 to-cyber-green/10'
+                        : layer2Color === 'red'
+                          ? 'bg-gradient-to-b from-cyber-red/20 to-cyber-red/10'
+                          : 'bg-gradient-to-b from-cyber-purple/20 to-cyber-purple/10',
               layer2Border && `border ${layer2Config.border}`,
               'transition-all duration-300'
             )}
@@ -306,12 +316,12 @@ export const NeonButton = React.forwardRef<HTMLButtonElement, NeonButtonProps>((
         </div>
       )}
 
-      {/* Text content - translucent to let color shine through */}
+      {/* Cyberpunk text content */}
       <span 
         className={cn(
-          'relative z-10 font-medium',
+          'relative z-10 font-mono font-bold uppercase tracking-wider',
           textSizeClasses[size],
-          !coloredText && 'mix-blend-overlay dark:mix-blend-screen'
+          coloredText && 'text-shadow-neon-cyan'
         )}
         style={{
           color: coloredText 
@@ -319,11 +329,11 @@ export const NeonButton = React.forwardRef<HTMLButtonElement, NeonButtonProps>((
                 ? layer2Config.text 
                 : layer1Color !== 'none' 
                   ? layer1Config.text 
-                  : 'rgba(255, 255, 255, 0.8)')
-            : 'rgba(255, 255, 255, 0.8)',
+                  : 'rgb(0, 255, 255)')
+            : 'rgb(0, 255, 255)',
           textShadow: coloredText && ((showLayer2 && layer2Color !== 'none') || (!showLayer2 && layer1Color !== 'none'))
-            ? '0 1px 2px rgba(0,0,0,0.8)'
-            : undefined
+            ? `0 0 8px ${showLayer2 && layer2Color !== 'none' ? `rgb(${layer2Config.textRgb})` : `rgb(${layer1Config.textRgb})`}`
+            : '0 0 8px rgb(0, 255, 255)'
         }}
       >
         {children}

@@ -36,8 +36,19 @@ export const BoardView = ({
 
   return (
     <div className="flex flex-col h-full min-h-[70vh] relative">
+      {/* Cyberpunk background with subtle gradient separations */}
+      <div className="absolute inset-0 bg-cyber-black/20 pointer-events-none">
+        {/* Subtle vertical gradients for column separation */}
+        <div className="absolute inset-0 grid grid-cols-4 gap-1">
+          <div className="bg-gradient-to-br from-cyber-cyan/5 via-transparent to-transparent"></div>
+          <div className="bg-gradient-to-br from-cyber-magenta/5 via-transparent to-transparent"></div>
+          <div className="bg-gradient-to-br from-cyber-yellow/5 via-transparent to-transparent"></div>
+          <div className="bg-gradient-to-br from-cyber-green/5 via-transparent to-transparent"></div>
+        </div>
+      </div>
+      
       {/* Board Columns Grid */}
-      <div className="grid grid-cols-4 gap-1 flex-1 p-2">
+      <div className="grid grid-cols-4 gap-1 flex-1 p-2 relative z-10">
         {columns.map(({ status, title }) => (
           <KanbanColumn
             key={status}
