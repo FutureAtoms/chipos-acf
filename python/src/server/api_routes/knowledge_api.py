@@ -247,7 +247,7 @@ async def get_knowledge_item_chunks(source_id: str, domain_filter: str | None = 
         supabase = get_supabase_client()
         
         # Build the query
-        query = supabase.from_("archon_crawled_pages").select(
+        query = supabase.from_("chipos_crawled_pages").select(
             "id, source_id, content, metadata, url"
         )
         query = query.eq("source_id", source_id)
@@ -295,7 +295,7 @@ async def get_knowledge_item_code_examples(source_id: str):
         # Query code examples with full content for this specific source
         supabase = get_supabase_client()
         result = (
-            supabase.from_("archon_code_examples")
+            supabase.from_("chipos_code_examples")
             .select("id, source_id, content, summary, metadata")
             .eq("source_id", source_id)
             .execute()

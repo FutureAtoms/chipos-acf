@@ -187,8 +187,8 @@ def load_environment_config() -> EnvironmentConfig:
     port_str = os.getenv("PORT")
     if not port_str:
         # This appears to be for MCP configuration based on default 8051
-        # Support both new CHIPOS_MCP_PORT and legacy ARCHON_MCP_PORT
-        port_str = os.getenv("CHIPOS_MCP_PORT") or os.getenv("ARCHON_MCP_PORT")
+        # Support both new CHIPOS_MCP_PORT and legacy CHIPOS_MCP_PORT
+        port_str = os.getenv("CHIPOS_MCP_PORT") or os.getenv("CHIPOS_MCP_PORT")
         if not port_str:
             raise ConfigurationError(
                 "PORT or CHIPOS_MCP_PORT environment variable is required. "

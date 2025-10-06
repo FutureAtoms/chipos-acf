@@ -37,7 +37,7 @@ class MCPClient:
                 # Fallback for when running in agents container
                 import os
 
-                mcp_port = os.getenv("CHIPOS_MCP_PORT") or os.getenv("ARCHON_MCP_PORT", "8051")
+                mcp_port = os.getenv("CHIPOS_MCP_PORT") or os.getenv("CHIPOS_MCP_PORT", "8051")
                 if os.getenv("DOCKER_CONTAINER"):
                     self.mcp_url = f"http://chipos-mcp:{mcp_port}"
                 else:

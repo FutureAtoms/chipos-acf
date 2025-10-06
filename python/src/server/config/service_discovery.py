@@ -28,10 +28,10 @@ class ServiceDiscovery:
     """
 
     def __init__(self):
-        # Get ports during initialization (with backward compatibility for ARCHON_* variables)
-        server_port = os.getenv("CHIPOS_SERVER_PORT") or os.getenv("ARCHON_SERVER_PORT")
-        mcp_port = os.getenv("CHIPOS_MCP_PORT") or os.getenv("ARCHON_MCP_PORT")
-        agents_port = os.getenv("CHIPOS_AGENTS_PORT") or os.getenv("ARCHON_AGENTS_PORT")
+        # Get ports during initialization (with backward compatibility for CHIPOS_* variables)
+        server_port = os.getenv("CHIPOS_SERVER_PORT") or os.getenv("CHIPOS_SERVER_PORT")
+        mcp_port = os.getenv("CHIPOS_MCP_PORT") or os.getenv("CHIPOS_MCP_PORT")
+        agents_port = os.getenv("CHIPOS_AGENTS_PORT") or os.getenv("CHIPOS_AGENTS_PORT")
 
         if not server_port:
             raise ValueError(

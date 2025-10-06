@@ -70,8 +70,8 @@ async def fetch_credentials_from_server():
         try:
             async with httpx.AsyncClient() as client:
                 # Call the server's internal credentials endpoint
-                # Require CHIPOS_SERVER_PORT to be set (with backward compatibility for ARCHON_SERVER_PORT)
-                server_port = os.getenv("CHIPOS_SERVER_PORT") or os.getenv("ARCHON_SERVER_PORT")
+                # Require CHIPOS_SERVER_PORT to be set (with backward compatibility for CHIPOS_SERVER_PORT)
+                server_port = os.getenv("CHIPOS_SERVER_PORT") or os.getenv("CHIPOS_SERVER_PORT")
                 if not server_port:
                     raise ValueError(
                         "CHIPOS_SERVER_PORT environment variable is required. "
@@ -287,8 +287,8 @@ async def stream_agent(agent_type: str, request: AgentRequest):
 
 # Main entry point
 if __name__ == "__main__":
-    # Require CHIPOS_AGENTS_PORT to be set (with backward compatibility for ARCHON_AGENTS_PORT)
-    agents_port = os.getenv("CHIPOS_AGENTS_PORT") or os.getenv("ARCHON_AGENTS_PORT")
+    # Require CHIPOS_AGENTS_PORT to be set (with backward compatibility for CHIPOS_AGENTS_PORT)
+    agents_port = os.getenv("CHIPOS_AGENTS_PORT") or os.getenv("CHIPOS_AGENTS_PORT")
     if not agents_port:
         raise ValueError(
             "CHIPOS_AGENTS_PORT environment variable is required. "

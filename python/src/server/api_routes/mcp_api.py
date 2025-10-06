@@ -105,7 +105,7 @@ async def get_mcp_config():
             api_logger.info("Getting MCP server configuration")
 
             # Get actual MCP port from environment (with backward compatibility) or use default
-            mcp_port = int(os.getenv("CHIPOS_MCP_PORT") or os.getenv("ARCHON_MCP_PORT", "8051"))
+            mcp_port = int(os.getenv("CHIPOS_MCP_PORT") or os.getenv("CHIPOS_MCP_PORT", "8051"))
 
             # Configuration for streamable-http mode with actual port
             config = {

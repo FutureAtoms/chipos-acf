@@ -287,7 +287,7 @@ async def _check_database_schema():
         client = get_supabase_client()
 
         # Try to query the new columns directly - if they exist, schema is up to date
-        test_query = client.table('archon_sources').select('source_url, source_display_name').limit(1).execute()
+        test_query = client.table('chipos_sources').select('source_url, source_display_name').limit(1).execute()
 
         # Cache successful result permanently
         _schema_check_cache["valid"] = True
@@ -340,8 +340,8 @@ def main():
     """Main entry point for running the server."""
     import uvicorn
 
-    # Require CHIPOS_SERVER_PORT to be set (with backward compatibility for ARCHON_SERVER_PORT)
-    server_port = os.getenv("CHIPOS_SERVER_PORT") or os.getenv("ARCHON_SERVER_PORT")
+    # Require CHIPOS_SERVER_PORT to be set (with backward compatibility for CHIPOS_SERVER_PORT)
+    server_port = os.getenv("CHIPOS_SERVER_PORT") or os.getenv("CHIPOS_SERVER_PORT")
     if not server_port:
         raise ValueError(
             "CHIPOS_SERVER_PORT environment variable is required. "

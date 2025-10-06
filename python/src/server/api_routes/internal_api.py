@@ -98,7 +98,7 @@ async def get_agent_credentials(request: Request) -> dict[str, Any]:
                 "AGENT_MAX_RETRIES", default="3"
             ),
             # MCP endpoint (with backward compatibility)
-            "MCP_SERVICE_URL": f"http://chipos-mcp:{os.getenv('CHIPOS_MCP_PORT') or os.getenv('ARCHON_MCP_PORT')}",
+            "MCP_SERVICE_URL": f"http://chipos-mcp:{os.getenv('CHIPOS_MCP_PORT') or os.getenv('CHIPOS_MCP_PORT')}",
             # Additional settings
             "LOG_LEVEL": await credential_service.get_credential("LOG_LEVEL", default="INFO"),
         }

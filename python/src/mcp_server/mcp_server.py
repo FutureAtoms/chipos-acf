@@ -69,8 +69,8 @@ _shared_context = None
 
 server_host = "0.0.0.0"  # Listen on all interfaces
 
-# Require CHIPOS_MCP_PORT to be set (with backward compatibility for ARCHON_MCP_PORT)
-mcp_port = os.getenv("CHIPOS_MCP_PORT") or os.getenv("ARCHON_MCP_PORT")
+# Require CHIPOS_MCP_PORT to be set (with backward compatibility for CHIPOS_MCP_PORT)
+mcp_port = os.getenv("CHIPOS_MCP_PORT") or os.getenv("CHIPOS_MCP_PORT")
 if not mcp_port:
     raise ValueError(
         "CHIPOS_MCP_PORT environment variable is required. "
