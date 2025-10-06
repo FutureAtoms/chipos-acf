@@ -1,0 +1,16 @@
+__pycache__
+.env
+.serena
+.claude/settings.local.json
+PRPs/local
+PRPs/completed/
+/logs/
+.zed
+tmp/
+temp/
+
+# macOS system files
+.DS_Store
+node_modules/
+package-lock.json
+package.json

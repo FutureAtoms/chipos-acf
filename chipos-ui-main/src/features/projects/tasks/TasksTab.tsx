@@ -1,0 +1,274 @@
+import { LayoutGrid, Plus, Table } from "lucide-react";
+import { useCallback, useState } from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { LiquidGlassButton, LiquidGlassToolbar } from "../../ui/magic/liquid-glass-card";
+import { DeleteConfirmModal } from "../../ui/components/DeleteConfirmModal";
+import { Button } from "../../ui/primitives";
+import { cn, glassmorphism } from "../../ui/primitives/styles";
+import { TaskEditModal } from "./components/TaskEditModal";
+import { useDeleteTask, useProjectTasks, useUpdateTask } from "./hooks";
+import type { Task } from "./types";
+import { getReorderTaskOrder, ORDER_INCREMENT, validateTaskOrder } from "./utils";
+import { BoardView, TableView } from "./views";
+
+interface TasksTabProps {
+  projectId: string;
+}
+
+export const TasksTab = ({ projectId }: TasksTabProps) => {
+  const [viewMode, setViewMode] = useState<"table" | "board">("board");
+  const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [taskToDelete, setTaskToDelete] = useState<Task | null>(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  // Fetch tasks using TanStack Query
+  const { data: tasks = [], isLoading: isLoadingTasks } = useProjectTasks(projectId);
+
+  // Mutations for task operations
+  const updateTaskMutation = useUpdateTask(projectId);
+  const deleteTaskMutation = useDeleteTask(projectId);
+
+  // Modal management functions
+  const openEditModal = (task: Task) => {
+    setEditingTask(task);
+    setIsModalOpen(true);
+  };
+
+  const openCreateModal = () => {
+    setEditingTask(null);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setEditingTask(null);
+    setIsModalOpen(false);
+  };
+
+  // Delete modal management functions
+  const openDeleteModal = (task: Task) => {
+    setTaskToDelete(task);
+    setShowDeleteModal(true);
+  };
+
+  const closeDeleteModal = () => {
+    setTaskToDelete(null);
+    setShowDeleteModal(false);
+  };
+
+  const confirmDeleteTask = () => {
+    if (!taskToDelete) return;
+
+    deleteTaskMutation.mutate(taskToDelete.id, {
+      onSuccess: () => {
+        closeDeleteModal();
+      },
+      onError: (error) => {
+        console.error("Failed to delete task:", error);
+      },
+    });
+  };
+
+  // Get default order for new tasks in a status
+  const getDefaultTaskOrder = useCallback((statusTasks: Task[]) => {
+    if (statusTasks.length === 0) return ORDER_INCREMENT;
+    const maxOrder = Math.max(...statusTasks.map((t) => t.task_order));
+    return maxOrder + ORDER_INCREMENT;
+  }, []);
+
+  // Task reordering - immediate update
+  const handleTaskReorder = useCallback(
+    async (taskId: string, targetIndex: number, status: Task["status"]) => {
+      // Get all tasks in the target status, sorted by current order
+      const statusTasks = (tasks as Task[])
+        .filter((task) => task.status === status)
+        .sort((a, b) => a.task_order - b.task_order);
+
+      const movingTaskIndex = statusTasks.findIndex((task) => task.id === taskId);
+      if (movingTaskIndex === -1 || targetIndex < 0 || targetIndex > statusTasks.length) return;
+      if (movingTaskIndex === targetIndex) return;
+
+      // Calculate new position using battle-tested utility
+      const newPosition = getReorderTaskOrder(statusTasks, taskId, targetIndex);
+
+      // Update immediately with optimistic updates
+      try {
+        await updateTaskMutation.mutateAsync({
+          taskId,
+          updates: {
+            task_order: newPosition,
+          },
+        });
+      } catch (error) {
+        console.error("Failed to reorder task:", error, {
+          taskId,
+          newPosition,
+        });
+        // Error toast handled by mutation
+      }
+    },
+    [tasks, updateTaskMutation],
+  );
+
+  // Move task to different status
+  const moveTask = useCallback(
+    async (taskId: string, newStatus: Task["status"]) => {
+      const movingTask = (tasks as Task[]).find((task) => task.id === taskId);
+      if (!movingTask || movingTask.status === newStatus) return;
+
+      try {
+        // Calculate position for new status
+        const tasksInNewStatus = (tasks as Task[]).filter((t) => t.status === newStatus);
+        const newOrder = getDefaultTaskOrder(tasksInNewStatus);
+
+        // Update via mutation (handles optimistic updates)
+        await updateTaskMutation.mutateAsync({
+          taskId,
+          updates: {
+            status: newStatus,
+            task_order: newOrder,
+          },
+        });
+
+        // Success handled by mutation
+      } catch (error) {
+        console.error("Failed to move task:", error, { taskId, newStatus });
+        // Error toast handled by mutation
+      }
+    },
+    [tasks, updateTaskMutation, getDefaultTaskOrder],
+  );
+
+  const completeTask = useCallback(
+    (taskId: string) => {
+      moveTask(taskId, "done");
+    },
+    [moveTask],
+  );
+
+  // Inline update for task fields
+  const updateTaskInline = async (taskId: string, updates: Partial<Task>) => {
+    try {
+      // Validate task_order if present (ensures integer precision)
+      const processedUpdates = { ...updates };
+      if (processedUpdates.task_order !== undefined) {
+        processedUpdates.task_order = validateTaskOrder(processedUpdates.task_order);
+      }
+
+      await updateTaskMutation.mutateAsync({
+        taskId,
+        updates: processedUpdates,
+      });
+    } catch (error) {
+      console.error("Failed to update task:", error, { taskId, updates });
+      // Error toast handled by mutation
+    }
+  };
+
+  if (isLoadingTasks) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
+  return (
+    <DndProvider backend={HTML5Backend}>
+      <div className="min-h-[70vh] relative">
+        {/* Main content - Table or Board view */}
+        <div className="relative h-[calc(100vh-220px)] overflow-auto">
+          {viewMode === "table" ? (
+            <TableView
+              tasks={tasks as Task[]}
+              projectId={projectId}
+              onTaskView={openEditModal}
+              onTaskComplete={completeTask}
+              onTaskDelete={openDeleteModal}
+              onTaskReorder={handleTaskReorder}
+              onTaskUpdate={updateTaskInline}
+            />
+          ) : (
+            <BoardView
+              tasks={tasks as Task[]}
+              projectId={projectId}
+              onTaskMove={moveTask}
+              onTaskReorder={handleTaskReorder}
+              onTaskEdit={openEditModal}
+              onTaskDelete={openDeleteModal}
+            />
+          )}
+        </div>
+
+        {/* Fixed View Controls using Radix primitives */}
+        <ViewControls viewMode={viewMode} onViewChange={setViewMode} onAddTask={openCreateModal} />
+
+        {/* Edit/Create Task Modal */}
+        <TaskEditModal isModalOpen={isModalOpen} editingTask={editingTask} projectId={projectId} onClose={closeModal} />
+
+        {/* Delete Task Modal */}
+        <DeleteConfirmModal
+          open={showDeleteModal}
+          itemName={taskToDelete?.title || ""}
+          onConfirm={confirmDeleteTask}
+          onCancel={closeDeleteModal}
+          type="task"
+          size="compact"
+        />
+      </div>
+    </DndProvider>
+  );
+};
+
+// Extracted ViewControls component using Radix primitives
+interface ViewControlsProps {
+  viewMode: "table" | "board";
+  onViewChange: (mode: "table" | "board") => void;
+  onAddTask: () => void;
+}
+
+const ViewControls = ({ viewMode, onViewChange, onAddTask }: ViewControlsProps) => {
+  return (
+    <div className="fixed bottom-28 left-0 right-0 flex justify-center z-40 pointer-events-none">
+      <div className="flex items-center gap-3 pointer-events-auto">
+        {/* Add Task Button */}
+        <LiquidGlassButton onClick={onAddTask} variant="primary">
+          <Plus className="w-4 h-4 mr-2" />
+          ADD TASK
+        </LiquidGlassButton>
+
+        {/* View Toggle Controls */}
+        <LiquidGlassToolbar className="flex items-center p-1">
+          <button
+            type="button"
+            onClick={() => onViewChange("table")}
+            className={cn(
+              "px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium transition-all duration-200",
+              viewMode === "table"
+                ? "bg-[#00d9ff]/20 text-[#00d9ff] border border-[#00d9ff]/30"
+                : "text-white/60 hover:text-white/80 border border-transparent",
+            )}
+          >
+            <Table className="w-4 h-4" />
+            <span>Table</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => onViewChange("board")}
+            className={cn(
+              "px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium transition-all duration-200",
+              viewMode === "board"
+                ? "bg-purple-500/20 text-purple-400 border border-purple-500/30"
+                : "text-white/60 hover:text-white/80 border border-transparent",
+            )}
+          >
+            <LayoutGrid className="w-4 h-4" />
+            <span>Board</span>
+          </button>
+        </LiquidGlassToolbar>
+      </div>
+    </div>
+  );
+};

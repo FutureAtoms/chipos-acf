@@ -1,0 +1,11 @@
+# Favor ChipOS local changes during merges to reduce breakage when syncing upstream Archon
+chipos-ui-main/package.json merge=ours
+chipos-ui-main/index.html merge=ours
+chipos-ui-main/README.md merge=ours
+start-dev.sh merge=ours
+.env merge=ours
+.env.local merge=ours
+
+# Use text auto normalization
+* text=auto eol=lf
+
