@@ -7,5 +7,5 @@ Version configuration for ChipOS.
 CHIPOS_VERSION = "0.1.0"
 
 # Repository information for GitHub API
-GITHUB_REPO_OWNER = "coleam00"
-GITHUB_REPO_NAME = "ChipOS"
+GITHUB_REPO_OWNER = "FutureAtoms"
+GITHUB_REPO_NAME = "chipos-acf"

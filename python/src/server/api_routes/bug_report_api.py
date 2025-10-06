@@ -47,7 +47,7 @@ class BugReportResponse(BaseModel):
 class GitHubService:
     def __init__(self):
         self.token = os.getenv("GITHUB_TOKEN")
-        self.repo = os.getenv("GITHUB_REPO", "dynamous-community/ChipOS-V2-Alpha")
+        self.repo = os.getenv("GITHUB_REPO", "FutureAtoms/chipos-acf")
 
     async def create_issue(self, bug_report: BugReportRequest) -> dict[str, Any]:
         """Create a GitHub issue from a bug report."""
@@ -275,6 +275,6 @@ async def bug_report_health():
         "status": "healthy" if github_configured else "degraded",
         "github_token_configured": github_configured,
         "github_repo_configured": repo_configured,
-        "repo": os.getenv("GITHUB_REPO", "dynamous-community/ChipOS-V2-Alpha"),
+        "repo": os.getenv("GITHUB_REPO", "FutureAtoms/chipos-acf"),
         "message": "Bug reporting is ready" if github_configured else "GitHub token not configured",
     }
